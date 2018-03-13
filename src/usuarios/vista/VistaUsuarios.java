@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+
+import usuarios.controlador.IControlUsuarios;
+
 import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -20,13 +23,16 @@ import javax.swing.JTable;
  * @author Martín Tomás Juran
  * @version 1.0, 12 de mar. de 2018
  */
-public class VentanaUsuarios extends JPanel {
+public class VistaUsuarios extends JPanel {
+	private IControlUsuarios control;
+	
 	private JTextField txtUsuario;
 	private JTextField txtApellido;
 	private JTextField txtNombre;
 	private JTextField txtNroDoc;
 	private JTable table;
-	public VentanaUsuarios() {
+	
+	public VistaUsuarios() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel busqueda = new JPanel();
