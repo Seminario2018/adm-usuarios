@@ -3,14 +3,12 @@ package usuarios.vista;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
 
 /**
  * @author Martín Tomás Juran
- * @version 1.0, 12 de mar. de 2018
+ * @version 1.0, 13 de mar. de 2018
  */
-public class VentanaPrincipal {
+public class VistaAgregar {
 
 	private JFrame frame;
 
@@ -19,13 +17,21 @@ public class VentanaPrincipal {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VistaAgregar window = new VistaAgregar();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		});
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public VentanaPrincipal() {
+	public VistaAgregar() {
 		initialize();
 	}
 
@@ -36,9 +42,6 @@ public class VentanaPrincipal {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel panel = new VistaUsuarios();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
 	}
 
 }
