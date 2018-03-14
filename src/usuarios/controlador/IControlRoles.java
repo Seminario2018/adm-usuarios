@@ -6,7 +6,7 @@ import usuarios.modelo.IRol;
 
 
 /**
- * @author Javier Eías Gómez Vicente
+ * @author Javier EÃ­as GÃ³mez Vicente
  * @version 1.0, 13 de mar. de 2018
  */
 public interface IControlRol {
@@ -19,7 +19,7 @@ public interface IControlRol {
 	public ArrayList<IRol> buscarRol(IRol rol);
 	
 	/**
-	 * @return una plantilla de Rol vacía 
+	 * @return una plantilla de Rol vacÃ­a 
 	 */
 	public IRol getIRol();
 }
