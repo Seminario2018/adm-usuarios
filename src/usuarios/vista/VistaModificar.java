@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import usuarios.controlador.IControlModificar;
+import usuarios.controlador.IControlModificarUsuario;
 
 /**
  * @author Martín Tomás Juran
@@ -13,7 +13,7 @@ import usuarios.controlador.IControlModificar;
 public class VistaModificar {
 
 	private JFrame frame;
-	private IControlModificar control;
+	private IControlModificarUsuario control;
 
 	/**
 	 * Launch the application.

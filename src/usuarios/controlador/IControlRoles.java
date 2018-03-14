@@ -2,33 +2,24 @@ package usuarios.controlador;
 
 import java.util.ArrayList;
 
-import usuarios.modelo.IUsuario;
 import usuarios.modelo.IRol;
 
+
 /**
- * @author Martín Tomás Juran
+ * @author Javier Eías Gómez Vicente
  * @version 1.0, 13 de mar. de 2018
  */
-public interface IControlRoles {
+public interface IControlRol {
 	/**
-	 * Recibe una plantilla de Usuario y devuelve todos los roles
-	 *  asignados al mismo
-	 * @param usuario - la plantilla de Usuario con los datos
-	 * @return lista de roles que corresponden al Usuario
+	 * Recibe una plantilla de Rol y realiza una busqueda
+	 *  filtrando por los campos correspondientes
+	 * @param rol - la plantilla de Rol con los datos
+	 * @return lista de Roles que satisfacen los filtros de busqueda
 	 */
-	public ArrayList<IRol> buscarRoles(IUsuario usuario);
+	public ArrayList<IRol> buscarRol(IRol rol);
 	
 	/**
-	 * @return lista completa de Roles existentes
+	 * @return una plantilla de Rol vacía 
 	 */
-	public ArrayList<IRol> buscarRoles();
-	
-	/**
-	 * Asigna un Rol a un Usuario 
-	 * @param usuario - la plantilla de Usuario con su identificador
-	 * @param rol - el rol que se quiere asignar
-	 * @return <strong>True</strong> si el Rol se asignó con éxito,
-	 * <strong>False</strong> en otro caso
-	 */
-	public boolean asignarRol(IUsuario usuario, IRol rol);
+	public IRol getIRol();
 }
