@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import usuarios.modelo.IPersona;
 
 /**
- * @author Javier Elías Gómez Vicente
+ * @author Javier ElÃ­as GÃ³mez Vicente
  * @version 1.0, 13 de mar. de 2018
  */
 public interface IControlPersona {
@@ -18,7 +18,7 @@ public interface IControlPersona {
 	public ArrayList<IPersona> buscarPersona(IPersona persona);
 	
 	/**
-	 * @return una plantilla de Persona vacía
+	 * @return una plantilla de Persona vacÃ­a
 	 */
 	public IPersona getIPersona();
 }
