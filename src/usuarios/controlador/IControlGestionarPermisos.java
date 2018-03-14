@@ -6,7 +6,7 @@ import usuarios.modelo.IPermiso;
 import usuarios.modelo.IRol;
 
 /**
- * @author Javier El�as G�mez Vicente
+ * @author Javier Elías Gómez Vicente
  * @version 1.0, 13 de mar. de 2018
  */
 public interface IControlAsignarPermiso {
@@ -27,7 +27,7 @@ public interface IControlAsignarPermiso {
 	 * Asigna un Permiso a un Rol 
 	 * @param rol - la plantilla de Rol con su identificador
 	 * @param permiso - el permiso que se quiere asignar
-	 * @return <strong>True</strong> si el Rol se asignó con éxito,
+	 * @return <strong>True</strong> si el Rol se asignÃ³ con Ã©xito,
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean asignarPermiso(IRol rol, IPermiso permiso);
