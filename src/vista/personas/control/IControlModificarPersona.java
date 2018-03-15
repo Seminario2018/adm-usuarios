@@ -1,6 +1,6 @@
 package vista.personas.control;
 
-import modelo.IPersona;
+import modelo.personas.IPersona;
 
 /**
  * @author Javier Elías Gómez Vicente
@@ -15,4 +15,9 @@ public interface IControlModificarPersona {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean modificarPersona(IPersona persona);
+	
+	/**
+	 * @return una plantilla de Persona vacía
+	 */
+	public IPersona getIPersona();
 }

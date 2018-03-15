@@ -2,7 +2,7 @@ package vista.roles.control;
 
 import java.util.ArrayList;
 
-import modelo.IRol;
+import modelo.roles.IRol;
 
 /**
  * @author Javier Eías Gómez Vicente

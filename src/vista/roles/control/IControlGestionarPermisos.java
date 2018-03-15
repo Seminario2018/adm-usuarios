@@ -2,8 +2,8 @@ package vista.roles.control;
 
 import java.util.ArrayList;
 
-import modelo.IPermiso;
-import modelo.IRol;
+import modelo.permisos.IPermiso;
+import modelo.roles.IRol;
 
 /**
  * @author Javier Elías Gómez Vicente

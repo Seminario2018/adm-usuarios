@@ -1,6 +1,6 @@
 package vista.usuarios.control;
 
-import modelo.IUsuario;
+import modelo.usuarios.IUsuario;
 
 /**
  * @author Martín Tomás Juran
@@ -15,4 +15,9 @@ public interface IControlModificarUsuario {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean modificarUsuario(IUsuario usuario);
+	
+	/**
+	 * @return una plantilla de Usuario vacía 
+	 */
+	public IUsuario getIUsuario();
 }

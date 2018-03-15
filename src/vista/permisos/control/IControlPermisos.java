@@ -2,7 +2,7 @@ package vista.permisos.control;
 
 import java.util.ArrayList;
 
-import modelo.IPermiso;
+import modelo.permisos.IPermiso;
 
 /**
  * @author Martín Tomás Juran

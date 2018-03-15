@@ -2,10 +2,10 @@ package controlador;
 
 import java.util.ArrayList;
 
-import modelo.IPermiso;
-import modelo.IPersona;
-import modelo.IRol;
-import modelo.IUsuario;
+import modelo.permisos.IPermiso;
+import modelo.personas.IPersona;
+import modelo.roles.IRol;
+import modelo.usuarios.IUsuario;
 
 /**
  * @author Martín Tomás Juran
@@ -14,11 +14,13 @@ import modelo.IUsuario;
 public interface IControlador {
 	/**
 	 * Crea un Usuario nuevo
+	 * @param persona - la plantilla de Persona a la cual se le asignará el Usuario
 	 * @param usuario - la plantilla de Usuario con los datos
 	 * @return <strong>True</strong> si el Usuario se creó con éxito,
 	 * <strong>False</strong> en otro caso
 	 */
-	public boolean agregarUsuario(IUsuario usuario);
+	public boolean agregarUsuario(IPersona persona, IUsuario usuario);
+
 	
 	/**
 	 * Modifica al Usuario que matchea con su identificador,

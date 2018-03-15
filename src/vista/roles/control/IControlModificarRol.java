@@ -1,6 +1,6 @@
 package vista.roles.control;
 
-import modelo.IRol;
+import modelo.roles.IRol;
 
 /**
  * @author Javier Elías Gómez Vicente
@@ -15,4 +15,9 @@ public interface IControlModificarRol {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean modificarRol(IRol rol);
+	
+	/**
+	 * @return una plantilla de Rol vacía 
+	 */
+	public IRol getIRol();
 }

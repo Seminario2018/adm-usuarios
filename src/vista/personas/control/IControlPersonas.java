@@ -2,7 +2,7 @@ package vista.personas.control;
 
 import java.util.ArrayList;
 
-import modelo.IPersona;
+import modelo.personas.IPersona;
 
 /**
  * @author Javier Elías Gómez Vicente

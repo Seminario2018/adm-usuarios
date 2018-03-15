@@ -1,10 +1,10 @@
 package vista.permisos.control;
 
-import modelo.IPermiso;
+import modelo.permisos.IPermiso;
 
 /**
  * @author Martín Tomás Juran
- * @version 1.0, 14 de mar. de 2018
+ * @version 1.1, 15 de mar. de 2018
  */
 public interface IControlModificarPermiso {
 	/**
@@ -15,4 +15,9 @@ public interface IControlModificarPermiso {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean modificarPermiso(IPermiso permiso);
+	
+	/**
+	 * @return una plantilla de Permiso vacía
+	 */
+	public IPermiso getIPermiso();
 }

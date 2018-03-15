@@ -2,8 +2,8 @@ package vista.usuarios.control;
 
 import java.util.ArrayList;
 
-import modelo.IRol;
-import modelo.IUsuario;
+import modelo.roles.IRol;
+import modelo.usuarios.IUsuario;
 
 /**
  * @author Martín Tomás Juran
