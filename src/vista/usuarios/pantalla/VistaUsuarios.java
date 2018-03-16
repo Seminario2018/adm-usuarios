@@ -33,6 +33,7 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 /**
  * @author Martín Tomás Juran
@@ -74,7 +75,7 @@ public class VistaUsuarios extends JFrame {
 			break;
 		}
 		
-//		this.usuarios = control.buscarUsuario(u, p);
+		//this.usuarios = control.buscarUsuario(u, p);
 		this.usuarios.add(new Usuario("Pepita", "Coqueta", "pepita@gmail.com", "pepita10", 1, null));
 		this.usuarios.add(new Usuario("José", "El loco", "joseloko@hotmail.com", "josecito", 0, null));
 		
@@ -197,7 +198,7 @@ public class VistaUsuarios extends JFrame {
 		cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
 		cmbEstado.setSelectedIndex(0);
 		GridBagConstraints gbc_cmbEstado = new GridBagConstraints();
-		gbc_cmbEstado.anchor = GridBagConstraints.WEST;
+		gbc_cmbEstado.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cmbEstado.insets = new Insets(0, 0, 5, 5);
 		gbc_cmbEstado.gridx = 1;
 		gbc_cmbEstado.gridy = 1;
@@ -232,7 +233,7 @@ public class VistaUsuarios extends JFrame {
 		cmbTipoDoc.setModel(new DefaultComboBoxModel(new String[] {"DNI"}));
 		cmbTipoDoc.setSelectedIndex(0);
 		GridBagConstraints gbc_cmbTipoDoc = new GridBagConstraints();
-		gbc_cmbTipoDoc.anchor = GridBagConstraints.WEST;
+		gbc_cmbTipoDoc.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cmbTipoDoc.insets = new Insets(0, 0, 5, 0);
 		gbc_cmbTipoDoc.gridx = 3;
 		gbc_cmbTipoDoc.gridy = 2;
@@ -286,7 +287,6 @@ public class VistaUsuarios extends JFrame {
 		
 		JPanel resultado = new JPanel();
 		getContentPane().add(resultado, BorderLayout.CENTER);
-		resultado.setLayout(new BorderLayout(0, 0));
 		
 		header = new JTable();
 		header.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -311,6 +311,7 @@ public class VistaUsuarios extends JFrame {
 				return columnEditables[column];
 			}
 		});
+		
 		DefaultTableModel dtm = (DefaultTableModel) header.getModel();
 		String[] head = new String[4];
 		head[0] = "Usuario";
@@ -318,11 +319,14 @@ public class VistaUsuarios extends JFrame {
 		head[2] = "Descripción";
 		head[3] = "Estado";
 		dtm.addRow(head);
+		
+		resultado.setLayout(new BorderLayout(0, 0));
 		header.setFocusable(false);
 		header.setRowSelectionAllowed(false);
 		resultado.add(header, BorderLayout.NORTH);
 		
 		table = new JTable();
+		resultado.add(table, BorderLayout.CENTER);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
@@ -331,6 +335,7 @@ public class VistaUsuarios extends JFrame {
 	    });
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
 			},
 			new String[] {
 				"Usuario", "Email", "Descripcion", "Estado"
@@ -342,14 +347,8 @@ public class VistaUsuarios extends JFrame {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-					false, false, false, false
-				};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
 		});
-		resultado.add(table);
+		table.setFillsViewportHeight(true);
 		
 		JPanel botones = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) botones.getLayout();

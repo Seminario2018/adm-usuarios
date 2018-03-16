@@ -8,9 +8,6 @@ import vista.usuarios.pantalla.VistaUsuarios;
  */
 public class Main {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		VistaUsuarios vistaUsuarios = new VistaUsuarios();
 		vistaUsuarios.setVisible(true);

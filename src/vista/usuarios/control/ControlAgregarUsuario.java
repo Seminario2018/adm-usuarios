@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.personas.IPersona;
 import modelo.usuarios.IUsuario;
@@ -15,14 +16,15 @@ import vista.usuarios.pantalla.VistaAgregarUsuario;
  */
 public class ControlAgregarUsuario implements IControlAgregarUsuario {
 
-	private IControlador control;
-	private VistaAgregarUsuario vista;
+	private IControlador control = new Controlador();
 	
+	/*
 	public ControlAgregarUsuario(IControlador control, VistaAgregarUsuario vista) {
 		super();
 		this.control = control;
 		this.vista = vista;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.usuarios.control.IControlAgregarUsuario#agregarUsuario(modelo.IPersona, modelo.IUsuario)
@@ -31,15 +33,15 @@ public class ControlAgregarUsuario implements IControlAgregarUsuario {
 	public boolean agregarUsuario(IPersona persona, IUsuario usuario) {
 		String error = "No se pudo agregar al usuario por las siguientes razones:\n";
 		boolean b = true;
-		if (usuario.getNombre() == null) {
+		if (usuario.getNombre().compareTo("") == 0) {
 			b = false;
 			error += "- Debe ingresar el nombre\n";
 		}
-		if (usuario.getEmail() == null) {
+		if (usuario.getEmail().compareTo("") == 0) {
 			b = false;
 			error += "- Debe ingresar el email\n";
 		}
-		if (usuario.getPassword() == null) {
+		if (usuario.getPassword().compareTo("") == 0) {
 			b = false;
 			error += "- Debe ingresar la contraseña\n";
 		}

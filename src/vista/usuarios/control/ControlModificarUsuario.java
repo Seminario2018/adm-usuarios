@@ -1,26 +1,23 @@
-/**
- * 
- */
 package vista.usuarios.control;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.usuarios.IUsuario;
 
 /**
- * @author Javier Elías Gómez Vicente
+ * @author Javier Elï¿½as Gï¿½mez Vicente
  *
  */
 public class ControlModificarUsuario implements IControlModificarUsuario {
 
-	IControlador control;
+	IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
+	/*
 	public ControlModificarUsuario(IControlador control) {
 		super();
 		this.control = control;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.usuarios.control.IControlModificarUsuario#modificarUsuario(modelo.usuarios.IUsuario)
