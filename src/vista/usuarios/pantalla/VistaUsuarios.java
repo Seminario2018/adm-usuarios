@@ -6,7 +6,10 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
+import modelo.personas.IPersona;
 import modelo.usuarios.IUsuario;
+import modelo.usuarios.Usuario;
+import vista.usuarios.control.ControlUsuarios;
 import vista.usuarios.control.IControlUsuarios;
 
 import java.awt.Insets;
@@ -19,23 +22,141 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JTable;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Martín Tomás Juran
  * @version 1.0, 12 de mar. de 2018
  */
 public class VistaUsuarios extends JFrame {
-	private IControlUsuarios control;
 	
+	private IControlUsuarios control = new ControlUsuarios();
+	private ArrayList<IUsuario> usuarios = new ArrayList<IUsuario>();
+	
+	private JComboBox<String> cmbTipoDoc;
+	private JComboBox<String> cmbEstado;
 	private JTextField txtUsuario;
 	private JTextField txtApellido;
 	private JTextField txtNombre;
 	private JTextField txtNroDoc;
-	private ArrayList<IUsuario> usuarios = new ArrayList<IUsuario>();
 	private JTable table;
+	private JTable header;
+	private JButton btnModificar;
+	private JButton btnEliminar; 
+	private JButton btnRoles; 
+	
+	private void botonBuscar() {
+		IUsuario u = control.getIUsuario();
+		IPersona p = control.getIPersona();		
+		
+		p.setApellido(txtApellido.getText());
+		p.setNombre(txtNombre.getText());
+		p.setTipoDoc((String) cmbTipoDoc.getSelectedItem());
+		p.setNroDoc(txtNroDoc.getText());
+		
+		u.setNombre(txtUsuario.getText());
+		switch ((String) cmbEstado.getSelectedItem()) {
+		case "Activo":
+			u.setEstado(1);
+			break;
+		default:
+			u.setEstado(0);
+			break;
+		}
+		
+//		this.usuarios = control.buscarUsuario(u, p);
+		this.usuarios.add(new Usuario("Pepita", "Coqueta", "pepita@gmail.com", "pepita10", 1, null));
+		this.usuarios.add(new Usuario("José", "El loco", "joseloko@hotmail.com", "josecito", 0, null));
+		
+		actualizarTabla();
+	}
+	
+	private void actualizarTabla() {
+		
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		dtm.setRowCount(0);
+		table.revalidate();
+		
+		if (usuarios != null) {
+			for (IUsuario u : this.usuarios) {
+				String[] row = new String[4];
+				row[0] = u.getNombre();
+				row[1] = u.getEmail();
+				row[2] = u.getDescripcion();
+				switch (u.getEstado()) {
+				case 1:
+					row[3] = "Activo";
+					break;
+				default:
+					row[3] = "Inactivo";
+					break;
+				}
+				dtm.addRow(row);
+			}
+		}
+	}
+	
+	private void botonAgregar() {
+		VistaAgregarUsuario vistaAgregar = new VistaAgregarUsuario();
+		vistaAgregar.setVisible(true);
+	}
+	
+	private void botonModificar() {
+		VistaModificarUsuario vistaModificar =
+				new VistaModificarUsuario(usuarioSeleccionado());
+		vistaModificar.setVisible(true);
+	}
+	
+	private void botonEliminar() {
+		control.eliminarUsuario(usuarioSeleccionado());
+	}
+	
+	private void botonRoles() {
+		VistaGestionarRoles vistaRoles =
+				new VistaGestionarRoles(usuarioSeleccionado());
+		vistaRoles.setVisible(true);
+	}
+	
+	private IUsuario usuarioSeleccionado() {
+		IUsuario u = null;
+		int i = 0;
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		String nombre = (String) dtm.getValueAt(table.getSelectedRow(), 0);
+		while (i < this.usuarios.size() && u == null) {
+			if (this.usuarios.get(i).getNombre() == nombre)
+				u = this.usuarios.get(i);
+			i++;
+		}
+		return u;
+	}
+	
+	private void habilitarBotones() {
+        if (table.getSelectedRow() == -1) {
+        	btnModificar.setEnabled(false);
+        	btnEliminar.setEnabled(false);
+        	btnRoles.setEnabled(false);
+        } else {
+        	btnModificar.setEnabled(true);
+        	btnEliminar.setEnabled(true);
+        	btnRoles.setEnabled(true);
+        }
+	}
 	
 	public VistaUsuarios() {
 		setTitle("Administración de Usuarios");
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel busqueda = new JPanel();
@@ -72,7 +193,9 @@ public class VistaUsuarios extends JFrame {
 		gbc_lblEstado.gridy = 1;
 		busqueda.add(lblEstado, gbc_lblEstado);
 		
-		JComboBox cmbEstado = new JComboBox();
+		cmbEstado = new JComboBox<String>();
+		cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
+		cmbEstado.setSelectedIndex(0);
 		GridBagConstraints gbc_cmbEstado = new GridBagConstraints();
 		gbc_cmbEstado.anchor = GridBagConstraints.WEST;
 		gbc_cmbEstado.insets = new Insets(0, 0, 5, 5);
@@ -105,7 +228,9 @@ public class VistaUsuarios extends JFrame {
 		gbc_lblTipoDoc.gridy = 2;
 		busqueda.add(lblTipoDoc, gbc_lblTipoDoc);
 		
-		JComboBox cmbTipoDoc = new JComboBox();
+		cmbTipoDoc = new JComboBox<String>();
+		cmbTipoDoc.setModel(new DefaultComboBoxModel(new String[] {"DNI"}));
+		cmbTipoDoc.setSelectedIndex(0);
 		GridBagConstraints gbc_cmbTipoDoc = new GridBagConstraints();
 		gbc_cmbTipoDoc.anchor = GridBagConstraints.WEST;
 		gbc_cmbTipoDoc.insets = new Insets(0, 0, 5, 0);
@@ -148,6 +273,11 @@ public class VistaUsuarios extends JFrame {
 		busqueda.add(txtNroDoc, gbc_txtNroDoc);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonBuscar();
+			}
+		});
 		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
 		gbc_btnBuscar.anchor = GridBagConstraints.EAST;
 		gbc_btnBuscar.gridx = 3;
@@ -156,9 +286,69 @@ public class VistaUsuarios extends JFrame {
 		
 		JPanel resultado = new JPanel();
 		getContentPane().add(resultado, BorderLayout.CENTER);
-		resultado.setLayout(new GridLayout(1, 0, 0, 0));
+		resultado.setLayout(new BorderLayout(0, 0));
+		
+		header = new JTable();
+		header.setFont(new Font("Tahoma", Font.BOLD, 11));
+		header.setBackground(Color.LIGHT_GRAY);
+		header.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Usuario", "Email", "Descripcion", "Estado"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false
+				};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		DefaultTableModel dtm = (DefaultTableModel) header.getModel();
+		String[] head = new String[4];
+		head[0] = "Usuario";
+		head[1] = "Email";
+		head[2] = "Descripción";
+		head[3] = "Estado";
+		dtm.addRow(head);
+		header.setFocusable(false);
+		header.setRowSelectionAllowed(false);
+		resultado.add(header, BorderLayout.NORTH);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+	        public void valueChanged(ListSelectionEvent event) {
+	        	habilitarBotones();
+	        }
+	    });
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Usuario", "Email", "Descripcion", "Estado"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false
+				};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		resultado.add(table);
 		
 		JPanel botones = new JPanel();
@@ -171,15 +361,38 @@ public class VistaUsuarios extends JFrame {
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonAgregar();
+			}
+		});
 		panel.add(btnAgregar);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
+		btnModificar.setEnabled(false);
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonModificar();
+			}
+		});
 		panel.add(btnModificar);
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonEliminar();
+			}
+		});
+		btnEliminar.setEnabled(false);
 		panel.add(btnEliminar);
 		
-		JButton btnRoles = new JButton("Roles");
+		btnRoles = new JButton("Roles");
+		btnRoles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonRoles();
+			}
+		});
+		btnRoles.setEnabled(false);
 		panel.add(btnRoles);
 	}
 

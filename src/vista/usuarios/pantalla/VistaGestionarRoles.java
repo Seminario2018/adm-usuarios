@@ -3,20 +3,20 @@ package vista.usuarios.pantalla;
 import javax.swing.JFrame;
 
 import modelo.usuarios.IUsuario;
-import vista.usuarios.control.IControlModificarUsuario;
+import vista.usuarios.control.IControlGestionarRoles;
 
 /**
  * @author Martín Tomás Juran
- * @version 1.0, 13 de mar. de 2018
+ * @version 1.0, 16 de mar. de 2018
  */
-public class VistaModificarUsuario extends JFrame {
-
-	private IControlModificarUsuario control;
+public class VistaGestionarRoles extends JFrame {
+	
+	private IControlGestionarRoles control;
 	private IUsuario usuario;
 
-	public VistaModificarUsuario(IUsuario usuario) {
+	public VistaGestionarRoles(IUsuario usuario) {
 		this.usuario = usuario;
-		setTitle("Modificar Usuario");
+		setTitle("Gestionar Roles de Usuario");
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
