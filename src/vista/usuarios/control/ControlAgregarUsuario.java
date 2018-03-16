@@ -1,13 +1,15 @@
 package vista.usuarios.control;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.personas.IPersona;
 import modelo.usuarios.IUsuario;
-import vista.usuarios.pantalla.VistaAgregarUsuario;
 
 /**
  * @author Martín Tomás Juran
@@ -15,14 +17,14 @@ import vista.usuarios.pantalla.VistaAgregarUsuario;
  */
 public class ControlAgregarUsuario implements IControlAgregarUsuario {
 
-	private IControlador control;
-	private VistaAgregarUsuario vista;
+	private IControlador control = new Controlador();
 	
-	public ControlAgregarUsuario(IControlador control, VistaAgregarUsuario vista) {
+	/*
+	public ControlAgregarUsuario(IControlador control) {
 		super();
 		this.control = control;
-		this.vista = vista;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.usuarios.control.IControlAgregarUsuario#agregarUsuario(modelo.IPersona, modelo.IUsuario)
@@ -30,21 +32,21 @@ public class ControlAgregarUsuario implements IControlAgregarUsuario {
 	@Override
 	public boolean agregarUsuario(IPersona persona, IUsuario usuario) {
 		String error = "No se pudo agregar al usuario por las siguientes razones:\n";
-		boolean b = true;
-		if (usuario.getNombre() == null) {
-			b = false;
+		boolean hubo_error = false;
+		if (usuario.getNombre().compareTo("") == 0) {
+		    hubo_error = true;
 			error += "- Debe ingresar el nombre\n";
 		}
-		if (usuario.getEmail() == null) {
-			b = false;
-			error += "- Debe ingresar el email\n";
+		if (esEmailValido(usuario.getEmail())) {
+		    hubo_error = true;
+			error += "- El email no es válido\n";
 		}
-		if (usuario.getPassword() == null) {
-			b = false;
+		if (usuario.getPassword().compareTo("") == 0) {
+		    hubo_error = true;
 			error += "- Debe ingresar la contraseña\n";
 		}
 		
-		if (!b) {
+		if (hubo_error) {
 			JOptionPane.showMessageDialog(null, error);
 			return false;
 		} else {
@@ -82,4 +84,13 @@ public class ControlAgregarUsuario implements IControlAgregarUsuario {
 		return control.getIPersona();
 	}
 
+	private boolean esEmailValido(String email) {
+	    // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+ 
+        Matcher matcher = pattern.matcher(email);
+        return matcher.find();
+	}
 }

@@ -35,4 +35,9 @@ public interface IControlGestionarRoles {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean suprimirRol(IUsuario usuario, IRol rol);
+	
+	/**
+	 * @return una plantilla de Rol vacía 
+	 */
+	public IRol getIRol();
 }

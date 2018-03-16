@@ -2,12 +2,16 @@ package controlador;
 
 import java.util.ArrayList;
 
+import modelo.permisos.GestorPermisos;
 import modelo.permisos.IGestorPermisos;
 import modelo.permisos.IPermiso;
+import modelo.personas.GestorPersonas;
 import modelo.personas.IGestorPersonas;
 import modelo.personas.IPersona;
+import modelo.roles.GestorRoles;
 import modelo.roles.IGestorRoles;
 import modelo.roles.IRol;
+import modelo.usuarios.GestorUsuarios;
 import modelo.usuarios.IGestorUsuarios;
 import modelo.usuarios.IUsuario;
 
@@ -17,11 +21,12 @@ import modelo.usuarios.IUsuario;
  */
 public class Controlador implements IControlador {
 
-	private IGestorUsuarios gestorUsuarios;
-	private IGestorPersonas gestorPersonas;
-	private IGestorRoles gestorRoles;
-	private IGestorPermisos gestorPermisos;
-	
+	private IGestorUsuarios gestorUsuarios = new GestorUsuarios();
+	private IGestorPersonas gestorPersonas = new GestorPersonas();
+	private IGestorRoles gestorRoles = new GestorRoles();
+	private IGestorPermisos gestorPermisos = new GestorPermisos();
+
+	/*
 	public Controlador(
 			IGestorUsuarios gestorUsuarios,
 			IGestorPersonas gestorPersonas,
@@ -33,6 +38,7 @@ public class Controlador implements IControlador {
 		this.gestorRoles = gestorRoles;
 		this.gestorPermisos = gestorPermisos;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see controlador.IControlador#agregarUsuario(modelo.IUsuario)
