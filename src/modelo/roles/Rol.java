@@ -2,11 +2,16 @@ package modelo.roles;
 
 import java.util.ArrayList;
 
+import modelo.permisos.Permiso;
+import persistencia.ManejoDatos;
+
 /**
  * @author Martín Tomás Juran
  * @version 1.0, 13 de mar. de 2018
  */
 public class Rol implements IRol {
+	
+	private ManejoDatos md = new ManejoDatos();
 	private String nombre;
 	private String nombreAmigable;
 	private String descripcion;
@@ -52,7 +57,18 @@ public class Rol implements IRol {
 		this.estado = estado;
 	}
 	public ArrayList<Object[]> getPermisos() {
-		return permisos;
+		ArrayList<Object[]> permisos = new ArrayList<Object[]>();
+		ArrayList<String> per = md.select("permisos p join permisosderoles pr join roles r", "permisos.* "
+				+ "pr.fecha_de_asignacion","Estado = 1 AND r.Nombre = pr.rol AND p.nombre = pr.permiso");
+		for (String s: per) {
+			String[] split = s.split(" ");
+			Object[] o = new Object[2];
+			o[0] = new Permiso(split[0], split[1],split[2], Integer.parseInt(split[3]));
+			o[1] = split[4];
+			permisos.add(o);
+		}
+		this.setPermisos(permisos);
+		return this.permisos;
 	}
 	public void setPermisos(ArrayList<Object[]> permisos) {
 		this.permisos = permisos;

@@ -2,18 +2,25 @@ package modelo.permisos;
 
 import java.util.ArrayList;
 
+import persistencia.ManejoDatos;
+
 /**
  * @author Martín Tomás Juran
  * @version 1.0, 15 de mar. de 2018
  */
 public class GestorPermisos implements IGestorPermisos {
 
+	ManejoDatos md = new ManejoDatos();
+	
 	/* (non-Javadoc)
 	 * @see modelo.permisos.IGestorPermisos#agregarPermiso(modelo.permisos.IPermiso)
 	 */
 	@Override
 	public boolean agregarPermiso(IPermiso permiso) {
-		return false;
+		md.insertar("permisos","Nombre, Funcionalidad, Estado, Descripcion", "'" + permiso.getNombre() + "', '" 
+				+ permiso.getFuncionalidad()  + "', " + permiso.getEstado() + ", '" 
+				+ permiso.getDescripcion() + "'");
+		return md.isEstado();
 	}
 
 	/* (non-Javadoc)
@@ -21,6 +28,8 @@ public class GestorPermisos implements IGestorPermisos {
 	 */
 	@Override
 	public boolean modificarPermiso(IPermiso permiso) {
+		md.update("permisos", "Funcionalidad = '" + permiso.getFuncionalidad() 
+		+ ", Descripcion = '" + permiso.getDescripcion() + "' ", "Nombre = " + permiso.getNombre());
 		return false;
 	}
 
@@ -29,7 +38,8 @@ public class GestorPermisos implements IGestorPermisos {
 	 */
 	@Override
 	public boolean eliminarPermiso(IPermiso permiso) {
-		return false;
+		md.update("Permisos", "Estado = " + 0, "Nombre = " + permiso.getNombre());
+		return md.isEstado();
 	}
 
 	/* (non-Javadoc)
@@ -37,7 +47,13 @@ public class GestorPermisos implements IGestorPermisos {
 	 */
 	@Override
 	public ArrayList<IPermiso> buscarPermiso(IPermiso permiso) {
-		return null;
+		ArrayList<IPermiso> permisos = new ArrayList();
+		ArrayList<String> per = md.select("permisos", "*", "Estado = 1");
+		for (String s: per) {
+			String[] split = s.split(" ");
+			permisos.add(new Permiso(split[0], split[1], split[2], Integer.parseInt(split[3])));
+		}
+		return permisos;
 	}
 
 	/* (non-Javadoc)

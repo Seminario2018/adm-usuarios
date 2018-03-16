@@ -1,8 +1,11 @@
 package modelo.roles;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import modelo.permisos.IPermiso;
+import modelo.permisos.Permiso;
+import persistencia.ManejoDatos;
 
 /**
  * @author Martín Tomás Juran
@@ -10,12 +13,17 @@ import modelo.permisos.IPermiso;
  */
 public class GestorRoles implements IGestorRoles {
 
+	private ManejoDatos md = new ManejoDatos();
+	
 	/* (non-Javadoc)
 	 * @see modelo.roles.IGestorRoles#agregarRol(modelo.roles.IRol)
 	 */
 	@Override
 	public boolean agregarRol(IRol rol) {
-		return false;
+		md.insertar("roles", "Nombre, Nombre_amigable, Descripcion, Estado", "'"
+			+ rol.getNombre() +	"', '" + rol.getNombreAmigable() + "', '" + 
+			rol.getDescripcion() + "', " + rol.getEstado());
+		return md.isEstado();
 	}
 
 	/* (non-Javadoc)
@@ -23,7 +31,9 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public boolean modificarRol(IRol rol) {
-		return false;
+		md.update("roles", "Nombre_amigable = '" + rol.getNombreAmigable()
+		+ "', Descripcion = " + rol.getDescripcion() + "', Estado = " + rol.getEstado(), "Nombre = " + rol.getNombre());
+		return md.isEstado();
 	}
 
 	/* (non-Javadoc)
@@ -31,7 +41,8 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public boolean eliminarRol(IRol rol) {
-		return false;
+		md.update("roles", "Estado = " + 0, "Nombre = " + rol.getNombre());
+		return md.isEstado();
 	}
 
 	/* (non-Javadoc)
@@ -39,7 +50,13 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public ArrayList<IRol> buscarRoles(IRol rol) {
-		return null;
+		ArrayList<IRol> roles = new ArrayList<IRol>();
+		ArrayList<String> per = md.select("roles", "*", "Estado = 1");
+		for (String s: per) {
+			String[] split = s.split(" ");
+			roles.add(new Rol(split[0], split[1], split[2], Integer.parseInt(split[3]), null));
+		}
+		return roles;
 	}
 
 	/* (non-Javadoc)
@@ -55,7 +72,10 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public boolean asignarPermiso(IRol rol, IPermiso permiso) {
-		return false;
+		md.insertar("permisosderoles", "Rol, Permiso, fecha_de_asignacion, estado",
+				"'" + rol.getNombre() + "', '" + permiso.getNombre()
+				+ "', '" + Calendar.DATE + "/" + Calendar.MONTH + "/" + Calendar.YEAR + "', 1");
+		return md.isEstado();
 	}
 
 	/* (non-Javadoc)
@@ -63,7 +83,9 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public boolean suprimirPermiso(IRol rol, IPermiso permiso) {
-		return false;
+		md.update("permisosderoles", "Estado = 0",
+				"rol = '" + rol.getNombre() + "' and permiso = '" + permiso.getNombre() + "'");
+		return md.isEstado();
 	}
 
 }

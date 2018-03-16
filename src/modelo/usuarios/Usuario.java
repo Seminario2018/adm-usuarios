@@ -2,11 +2,16 @@ package modelo.usuarios;
 
 import java.util.ArrayList;
 
+import modelo.permisos.Permiso;
+import persistencia.ManejoDatos;
+
 /**
  * @author Martín Tomás Juran
  * @version 1.0, 13 de mar. de 2018
  */
 public class Usuario implements IUsuario {
+	
+	private ManejoDatos md = new ManejoDatos();
 	private String nombre;
 	private String descripcion;
 	private String email;
@@ -61,7 +66,19 @@ public class Usuario implements IUsuario {
 		this.estado = estado;
 	}
 	public ArrayList<Object[]> getRoles() {
-		return roles;
+		ArrayList<Object[]> permisos = new ArrayList<Object[]>();
+		ArrayList<String> per = md.select("roles r join rolesporusuario ru join usuarios", "r.* pr.fecha_de_asignacion",
+				"Estado = 1 AND ru.usuario = usuario.nombre AND ru.rol = roles.nombre");
+		for (String s: per) {
+			String[] split = s.split(" ");
+			Object[] o = new Object[2];
+			o[0] = new Permiso(split[0], split[1],split[2], Integer.parseInt(split[3]));
+			o[1] = split[4];
+			permisos.add(o);
+		}
+		this.setRoles(permisos);
+		return this.roles;
+
 	}
 	public void setRoles(ArrayList<Object[]> roles) {
 		this.roles = roles;

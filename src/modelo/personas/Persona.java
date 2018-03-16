@@ -101,6 +101,7 @@ public class Persona implements IPersona {
 	public void setUsuarios(ArrayList<IUsuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
 
 	@Override
 	public IPersona clone() {
