@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.personas.IPersona;
 import modelo.usuarios.IUsuario;
-import vista.usuarios.pantalla.VistaAgregarUsuario;
 
 /**
  * @author Martín Tomás Juran
@@ -17,14 +17,14 @@ import vista.usuarios.pantalla.VistaAgregarUsuario;
  */
 public class ControlAgregarUsuario implements IControlAgregarUsuario {
 
-	private IControlador control;
-	private VistaAgregarUsuario vista;
+	private IControlador control = new Controlador();
 	
-	public ControlAgregarUsuario(IControlador control, VistaAgregarUsuario vista) {
+	/*
+	public ControlAgregarUsuario(IControlador control) {
 		super();
 		this.control = control;
-		this.vista = vista;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.usuarios.control.IControlAgregarUsuario#agregarUsuario(modelo.IPersona, modelo.IUsuario)

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.usuarios.IUsuario;
 
@@ -17,15 +18,14 @@ import modelo.usuarios.IUsuario;
  */
 public class ControlModificarUsuario implements IControlModificarUsuario {
 
-	IControlador control;
+	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
+	/*
 	public ControlModificarUsuario(IControlador control) {
 		super();
 		this.control = control;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.usuarios.control.IControlModificarUsuario#modificarUsuario(modelo.usuarios.IUsuario)
