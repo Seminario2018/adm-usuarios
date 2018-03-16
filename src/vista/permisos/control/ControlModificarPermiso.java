@@ -3,11 +3,13 @@
  */
 package vista.permisos.control;
 
+import javax.swing.JOptionPane;
+
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
 
 /**
- * @author Javier Elías Gómez Vicente
+ * @author Javier Elï¿½as Gï¿½mez Vicente
  *
  */
 public class ControlModificarPermiso implements IControlModificarPermiso {
@@ -27,7 +29,29 @@ public class ControlModificarPermiso implements IControlModificarPermiso {
 	 */
 	@Override
 	public boolean modificarPermiso(IPermiso permiso) {
-		return control.modificarPermiso(permiso);
+	    String error = "No se pudo modificar el permiso por las siguientes razones:\n";
+        boolean b = false;
+        if (permiso.getNombre().compareTo("") == 0) {
+            b = true;
+            error += "- Debe ingresar el nombre\n";
+        }
+        if (permiso.getFuncionalidad().compareTo("") == 0) {
+            b = true;
+            error += "- Debe ingresar la funcionalidad\n";
+        }
+        
+        if (b) {
+            JOptionPane.showMessageDialog(null, error);
+            return false;
+        } else {
+            if (control.modificarPermiso(permiso)) {
+                JOptionPane.showMessageDialog(null, "El permiso se modificÃ³ con Ã©xito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Hubo un problema al modificar el permiso");
+                return false;
+            }
+        }
 	}
 
 	/* (non-Javadoc)

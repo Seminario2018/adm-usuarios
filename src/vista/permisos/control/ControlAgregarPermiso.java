@@ -3,11 +3,13 @@
  */
 package vista.permisos.control;
 
+import javax.swing.JOptionPane;
+
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
 
 /**
- * @author Javier Elías Gómez Vicente
+ * @author Javier Elï¿½as Gï¿½mez Vicente
  *
  */
 public class ControlAgregarPermiso implements IControlAgregarPermiso {
@@ -27,7 +29,29 @@ public class ControlAgregarPermiso implements IControlAgregarPermiso {
 	 */
 	@Override
 	public boolean agregarPermiso(IPermiso permiso) {
-		return control.agregarPermiso(permiso);
+	    String error = "No se pudo agregar el permiso por las siguientes razones:\n";
+        boolean hubo_error = false;
+        if (permiso.getNombre().compareTo("") == 0) {
+            hubo_error = true;
+            error += "- Debe ingresar el nombre\n";
+        }
+        if (permiso.getFuncionalidad().compareTo("") == 0) {
+            hubo_error = true;
+            error += "- Debe ingresar la funcionalidad\n";
+        }
+        
+        if (hubo_error) {
+            JOptionPane.showMessageDialog(null, error);
+            return false;
+        } else {
+            if (control.agregarPermiso(permiso)) {
+                JOptionPane.showMessageDialog(null, "El usuario se agregÃ³ con Ã©xito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Hubo un problema al agregar al usuario");
+                return false;
+            }
+        }
 	}
 
 	/* (non-Javadoc)
