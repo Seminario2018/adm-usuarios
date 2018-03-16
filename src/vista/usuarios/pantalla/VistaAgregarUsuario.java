@@ -279,6 +279,12 @@ public class VistaAgregarUsuario extends JFrame {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false
+				};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
 		DefaultTableModel dtm = (DefaultTableModel) header.getModel();
 		String[] head = new String[4];
@@ -310,6 +316,12 @@ public class VistaAgregarUsuario extends JFrame {
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false
+				};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		panelResultados.add(table, BorderLayout.CENTER);

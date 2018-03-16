@@ -5,25 +5,25 @@ package vista.usuarios.control;
 
 import java.util.ArrayList;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.roles.IRol;
 import modelo.usuarios.IUsuario;
 
 /**
- * @author Javier Eías Gómez Vicente
+ * @author Javier Eï¿½as Gï¿½mez Vicente
  *
  */
 public class ControlGestionarRoles implements IControlGestionarRoles {
 	
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
+	/*
 	public ControlGestionarRoles(IControlador control) {
 		super();
 		this.control = control;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.usuarios.control.IControlGestionarRoles#buscarRoles(modelo.roles.IRol)
@@ -47,6 +47,14 @@ public class ControlGestionarRoles implements IControlGestionarRoles {
 	@Override
 	public boolean suprimirRol(IUsuario usuario, IRol rol) {
 		return control.suprimirRol(usuario, rol);
+	}
+
+	/* (non-Javadoc)
+	 * @see vista.usuarios.control.IControlGestionarRoles#getIRol()
+	 */
+	@Override
+	public IRol getIRol() {
+		return control.getIRol();
 	}
 
 }

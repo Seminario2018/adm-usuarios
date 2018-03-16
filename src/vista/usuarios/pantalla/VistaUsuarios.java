@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
 import modelo.personas.IPersona;
+import modelo.roles.Rol;
 import modelo.usuarios.IUsuario;
 import modelo.usuarios.Usuario;
 import vista.usuarios.control.ControlUsuarios;
@@ -76,7 +77,11 @@ public class VistaUsuarios extends JFrame {
 		}
 		
 		//this.usuarios = control.buscarUsuario(u, p);
-		this.usuarios.add(new Usuario("Pepita", "Coqueta", "pepita@gmail.com", "pepita10", 1, null));
+		ArrayList<Object[]> rolesU = new ArrayList<Object[]>();
+		Object[] rolU = new Object[2];
+		rolU[0] = new Rol("SUPER", "Super-Usuario", "Todo lo puede", 1, null);
+		rolesU.add(rolU);
+		this.usuarios.add(new Usuario("Pepita", "Coqueta", "pepita@gmail.com", "pepita10", 1, rolesU));
 		this.usuarios.add(new Usuario("José", "El loco", "joseloko@hotmail.com", "josecito", 0, null));
 		
 		actualizarTabla();
@@ -346,6 +351,12 @@ public class VistaUsuarios extends JFrame {
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false
+				};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		table.setFillsViewportHeight(true);
