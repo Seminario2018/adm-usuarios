@@ -21,7 +21,7 @@ public class GestorPersonas implements IGestorPersonas {
 	@Override
 	public boolean agregarPersona(IPersona persona) {
 		md.insertar("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
-				+ "Direccion, Telefono, Estado, Fecha de nacimiento",
+				+ "Direccion, Telefono, Estado, Fecha_de_nacimiento",
 				"'" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getTipoDoc() + "', '"
 				+ persona.getNroDoc() + "', '" + persona.getCiudad() + "', '" + persona.getDireccion() + "', '" + 
 				persona.getTelefono() + "', 1, '" + persona.getFechaNacimiento() + "'");
