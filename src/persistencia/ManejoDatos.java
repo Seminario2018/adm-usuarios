@@ -2,7 +2,7 @@ package persistencia;
 
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +29,7 @@ public class ManejoDatos {
 		System.out.println(query);
 		try {
 			Statement st = c.createStatement();
-			st.executeQuery(query);
+			st.execute(query);
 		}
 		catch(Exception e){
 			estado = false;
@@ -54,7 +54,7 @@ public class ManejoDatos {
 			{
 				String res1 = "";
 				if (campos.equals("*")){
-					res1 += resultSet.getString("ID");
+					res1 += 
 					res1 += "\n";
 				}else{
 					for (String s : fields){
@@ -89,7 +89,7 @@ public class ManejoDatos {
 			{
 				String res1 = "";
 				if (campos.equals("*")){
-					res1 += resultSet.getString("ID");
+					res1 += resultSet.toString();
 					res1 += "\n";
 				}else{
 					for (String s : fields){

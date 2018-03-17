@@ -3,6 +3,7 @@ package modelo.usuarios;
 import java.util.ArrayList;
 
 import modelo.permisos.Permiso;
+import modelo.roles.Rol;
 import persistencia.ManejoDatos;
 
 /**
@@ -72,7 +73,7 @@ public class Usuario implements IUsuario {
 		for (String s: per) {
 			String[] split = s.split(" ");
 			Object[] o = new Object[2];
-			o[0] = new Permiso(split[0], split[1],split[2], Integer.parseInt(split[3]));
+			o[0] = new Rol(split[0], split[1],split[2], Integer.parseInt(split[3]),null);
 			o[1] = split[4];
 			permisos.add(o);
 		}
