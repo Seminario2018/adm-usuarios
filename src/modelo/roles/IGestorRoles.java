@@ -64,4 +64,5 @@ public interface IGestorRoles {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean suprimirPermiso(IRol rol, IPermiso permiso);
+
 }

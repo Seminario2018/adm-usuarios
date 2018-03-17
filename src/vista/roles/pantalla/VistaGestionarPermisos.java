@@ -29,6 +29,8 @@ import modelo.roles.IRol;
 import vista.permisos.pantalla.VistaAgregarPermiso;
 import vista.roles.control.ControlGestionarPermisos;
 import vista.roles.control.IControlGestionarPermisos;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @author Javier Elías Gómez Vicente
@@ -53,13 +55,13 @@ public class VistaGestionarPermisos extends JFrame {
 	private JButton btnSuprimir;
 
 	private void botonAsignar() {
-		if (control.asignarPermiso(this.rol, permisoSeleccionado())) {
+		if (control.asignarPermiso(this.rol, this.permisoSeleccionadoAsig())) {
 			actualizarTablaR();
 		}
 	}
 	
 	private void botonSuprimir() {
-		if (control.suprimirPermiso(this.rol, permisoSeleccionado())) {
+		if (control.suprimirPermiso(this.rol, this.permisoSeleccionadoSup())) {
 			actualizarTablaR();
 		}
 	}
@@ -80,13 +82,30 @@ public class VistaGestionarPermisos extends JFrame {
 			rol.setEstado(0);
 			break;
 		}
-		
+		permiso.setFuncionalidad("");
+		permiso.setDescripcion("");
+		permiso.setEstado(1);
+		permiso.setNombre(this.txtNombre.getText());
 		this.permisos = this.control.buscarPermisos(permiso);
 		
 		actualizarTablaP();
+		actualizarTablaR();
 	}
 	
-	private IPermiso permisoSeleccionado() {
+	private IPermiso permisoSeleccionadoAsig() {
+		IPermiso p = null;
+		int i = 0;
+		DefaultTableModel dtm = (DefaultTableModel) tabler.getModel();
+		String nombre = (String) dtm.getValueAt(tabler.getSelectedRow(), 0);
+		while (i < this.permisos.size() && p == null) {
+			if (this.permisos.get(i).getNombre() == nombre)
+				p = this.permisos.get(i);
+			i++;
+		}
+		return p;
+	}
+	
+	private IPermiso permisoSeleccionadoSup() {
 		IPermiso p = null;
 		int i = 0;
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
@@ -135,13 +154,18 @@ public class VistaGestionarPermisos extends JFrame {
 	}
 	
 	private void habilitarBotones() {
-		 if (table.getSelectedRow() == -1) {
+		 if (tabler.getSelectedRow() == -1) {
 			 btnAsignar.setEnabled(false);
-			 btnSuprimir.setEnabled(false);
+			 //btnSuprimir.setEnabled(false);
 	     } else {
 	    	 btnAsignar.setEnabled(true);
-	    	 btnSuprimir.setEnabled(true);
+	    	 //btnSuprimir.setEnabled(true);
 	     }
+		 if (table.getSelectedRow() == -1) {
+			 btnSuprimir.setEnabled(false);
+		 }else {
+			 btnSuprimir.setEnabled(true);
+		 }
 	}
 	
 	public VistaGestionarPermisos(IRol rol) {
@@ -196,6 +220,12 @@ public class VistaGestionarPermisos extends JFrame {
 		panelRol.add(headerr, BorderLayout.NORTH);
 		
 		tabler = new JTable();
+		tabler.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				habilitarBotones();
+			}
+		});
 		tabler.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},

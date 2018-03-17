@@ -55,6 +55,7 @@ public class VistaRoles extends JFrame {
 		IRol r = control.getIRol();	
 		r.setNombre(txtRol.getText());
 		r.setNombreAmigable(txtNAmigable.getText());
+		r.setDescripcion("");
 		
 		switch ((String) cmbEstado.getSelectedItem()) {
 		case "Activo":
@@ -65,8 +66,10 @@ public class VistaRoles extends JFrame {
 			break;
 		}
 		
+		this.roles = this.control.buscarRoles(r);
 		this.roles.add(new Rol("SUPER", "Super-Usuario", "Todo lo puede", 1, null));
 		this.roles.add(new Rol("ADMIN", "Administrador", "Permisos administrativos", 1, null));
+		
 		
 		actualizarTabla();
 	}

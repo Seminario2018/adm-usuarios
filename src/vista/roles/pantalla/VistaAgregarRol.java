@@ -137,7 +137,7 @@ public class VistaAgregarRol extends JFrame {
 				botonAgregar();
 			}
 		});
-		btnAgregar.setEnabled(false);
+		btnAgregar.setEnabled(true);
 		pnlBtnUsuario.add(btnAgregar);
 		
 		JLabel lblDatosRol = new JLabel("Datos de Rol:");

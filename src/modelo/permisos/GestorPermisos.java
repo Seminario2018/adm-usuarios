@@ -2,6 +2,7 @@ package modelo.permisos;
 
 import java.util.ArrayList;
 
+import modelo.roles.IRol;
 import persistencia.ManejoDatos;
 
 /**
@@ -66,14 +67,48 @@ public class GestorPermisos implements IGestorPermisos {
 			condicion += " AND " + s;
 		}
 		ArrayList<IPermiso> permisos = new ArrayList();
-		ArrayList<String> per = md.select("permisos", "Nombre, Funcionalidad, Estado, Descripcion", condicion);
+		ArrayList<String> per = md.select("permisos", "Nombre, Funcionalidad, Descripcion, Estado", condicion);
 		for (String s: per) {
-			String[] split = s.split(" ");
+			String[] split = s.split(" -- ");
 			permisos.add(new Permiso(split[0], split[1], split[2], Integer.parseInt(split[3])));
 		}
 		return permisos;
 	}
-
+	
+	public ArrayList<IPermiso> buscarPermisosPorRol(IPermiso permiso, IRol rol){
+		ArrayList<IPermiso> permisos = new ArrayList<IPermiso>();
+		String condicion = "";
+		if(permiso.getEstado() == 1) {
+			condicion = "pr.Estado = 1";
+		}else {
+			condicion = "pr.Estado = 0";
+		}
+		ArrayList<String> per = md.select("permisos p join permisosderoles pr", "p.Nombre, p.Funcionalidad, p.Descripcion, p.Estado",
+				condicion + " AND '" + rol.getNombre() + "' = pr.Rol");
+		for (String s: per) {
+			String[] split = s.split(" -- ");
+			permisos.add(new Permiso(split[0], split[1], split[2], Integer.parseInt(split[3])));
+		}		
+		return permisos;
+	}
+		
+	public ArrayList<IPermiso> buscarNoPermisosPorRol(IPermiso permiso, IRol rol){
+		ArrayList<IPermiso> permisos = new ArrayList<IPermiso>();
+		String condicion = "";
+		if(permiso.getEstado() == 1) {
+			condicion = "pr.Estado = 1";
+		}else {
+			condicion = "pr.Estado = 0";
+		}
+		ArrayList<String> per = md.select("permisos p join permisosderoles pr", "p.Nombre, p.Funcionalidad, p.Descripcion, p.Estado",
+				condicion + " AND '" + rol.getNombre() + "' <> pr.Rol");
+		for (String s: per) {
+			String[] split = s.split(" -- ");
+			permisos.add(new Permiso(split[0], split[1], split[2], Integer.parseInt(split[3])));
+		}		
+		return permisos;
+	}
+	
 	/* (non-Javadoc)
 	 * @see modelo.permisos.IGestorPermisos#getIPermiso()
 	 */

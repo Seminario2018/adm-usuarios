@@ -80,9 +80,9 @@ public class GestorPersonas implements IGestorPersonas {
 		ArrayList<String> per = md.select("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
 				+ " Direccion, Telefono, Estado, Fecha_de_nacimiento", condicion);
 		for (String s: per) {
-			String[] split = s.split(" ");
+			String[] split = s.split(" -- ");
 			personas.add(new Persona(split[0], split[1], split[2], split[3], split[4], split[5],
-					split[5], Integer.parseInt(split[6]), split[7], null));
+					split[6], Integer.parseInt(split[7]), split[8], null));
 		}
 		return personas;
 	}
