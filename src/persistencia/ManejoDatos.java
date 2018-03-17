@@ -42,13 +42,14 @@ public class ManejoDatos {
 		
 	}
 	
-	public ArrayList<String> select(String tabla, String campos){
+	public ArrayList<String> select(String tabla, String campos) {
 		estado = true;
 		ArrayList<String> res = new ArrayList<>();
 		String[] fields = campos.split(", ");
 		Connection c = con.conectar();
 		try {
 			Statement st = c.createStatement();
+			System.out.println("select " + campos + " from " + tabla);
 			ResultSet resultSet = st.executeQuery("select " + campos + " from " + tabla);
 			while (resultSet.next())
 			{
@@ -58,7 +59,11 @@ public class ManejoDatos {
 					res1 += "\n";
 				}else{
 					for (String s : fields){
+<<<<<<< HEAD
 						res1 += resultSet.getString(s) + " -- ";
+=======
+						res1 += resultSet.getString(s) + ",";
+>>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 					}
 					res.add(res1);					 
 				}
@@ -85,6 +90,7 @@ public class ManejoDatos {
 		try {
 			Statement st = c.createStatement();
 			String query = "select " + campos + " from " + tabla + " where " + condicion;
+			System.out.println(query);
 			ResultSet resultSet = st.executeQuery(query);
 			while (resultSet.next())
 			{
@@ -94,9 +100,14 @@ public class ManejoDatos {
 					res1 += "\n";
 				}else{
 					for (String s : fields){
+<<<<<<< HEAD
 						res1 += resultSet.getString(s) + " -- ";
+=======
+						res1 += resultSet.getString(s) + ",";
+>>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 					}
-					res.add(res1);					 
+					res.add(res1);
+					System.out.println(res1);
 				}
 				 
 			}

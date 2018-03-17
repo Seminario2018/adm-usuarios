@@ -74,6 +74,7 @@ public class VistaAgregarUsuario extends JFrame {
 		p.setNombre(txtNombre.getText());
 		p.setNroDoc(txtNroDoc.getText());
 		p.setTipoDoc((String) cmbTipoDoc.getSelectedItem());
+		p.setEstado(1);
 		
 		this.personas = this.control.buscarPersona(p);
 		/*
