@@ -12,12 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.personas.IPersona;
 import modelo.personas.Persona;
 import vista.personas.control.ControlAgregarPersona;
 import vista.personas.control.IControlAgregarPersona;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Martín Tomás Juran
@@ -34,10 +38,31 @@ public class VistaAgregarPersona extends JFrame {
 	private JTextField txtNroDoc;
 	private JTextField txtTelefono;
 	private JTextField txtCiudad;
+	private JComboBox<String> cmbDay;
+	private JComboBox<String> cmbMon;
+	private JComboBox<String> cmbYear;
 	
 	private void botonAgregar() {
+		/*
 		control.agregarPersona(new Persona("Pepita", "Gonzalez", "DNI", "12",
 				"Luján", "Maraboto 823", "471762", 1, "2016-06-29", null));
+		*/
+		IPersona p = this.control.getIPersona();
+		
+		p.setNombre(txtNombre.getText());
+		p.setApellido(txtApellido.getText());
+		p.setTipoDoc((String) cmbTipoDoc.getSelectedItem());
+		p.setNroDoc(txtNroDoc.getText());
+		p.setCiudad(txtCiudad.getText());
+		p.setDireccion(txtDireccion.getText());
+		p.setTelefono(txtTelefono.getText());		
+		p.setFechaNacimiento(
+				(String) cmbYear.getSelectedItem() + "-" +
+				(String) cmbMon.getSelectedItem() + "-" +
+				(String) cmbDay.getSelectedItem()
+				);
+		
+		control.agregarPersona(p);
 	}
 	
 	public VistaAgregarPersona() {
@@ -188,39 +213,78 @@ public class VistaAgregarPersona extends JFrame {
 		gbc_panel.gridx = 3;
 		gbc_panel.gridy = 3;
 		datos.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[] {0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[] {0, 0};
+		gbl_panel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
-		JComboBox cmbYear = new JComboBox();
 		String[] years = new String[100];
 		for (int i = 0; i < 100; i++) {
-			years[i] = Integer.toString(i + 1918);
+			years[i] = Integer.toString(2018 - i);
 		}
-		cmbYear.setModel(new DefaultComboBoxModel(years));
-		cmbYear.setSelectedIndex(0);
-		panel.add(cmbYear);
-		
-		JLabel label = new JLabel("/");
-		panel.add(label);
-		
-		JComboBox cmbMon = new JComboBox();
 		String[] months = new String[12];
 		for (int i = 0; i < 12; i++) {
 			months[i] = Integer.toString(i+1);
+			if ((i+1) / 10 < 1) {
+				months[i] = "0" + months[i];
+			}
 		}
-		cmbMon.setModel(new DefaultComboBoxModel(months));
-		cmbMon.setSelectedIndex(0);
-		panel.add(cmbMon);
-		
-		JLabel label_1 = new JLabel("/");
-		panel.add(label_1);
-		
-		JComboBox cmbDay = new JComboBox();
 		String[] days = new String[31];
 		for (int i = 0; i < 31; i++) {
 			days[i] = Integer.toString(i+1);
+			if ((i+1) / 10 < 1) {
+				days[i] = "0" + days[i];
+			}
 		}
-		cmbMon.setModel(new DefaultComboBoxModel(days));
+		
+		cmbYear = new JComboBox();
+		cmbYear.setModel(new DefaultComboBoxModel(years));
+		cmbYear.setSelectedIndex(0);
+		GridBagConstraints gbc_cmbYear = new GridBagConstraints();
+		gbc_cmbYear.fill = GridBagConstraints.BOTH;
+		gbc_cmbYear.insets = new Insets(0, 0, 0, 5);
+		gbc_cmbYear.gridx = 0;
+		gbc_cmbYear.gridy = 0;
+		panel.add(cmbYear, gbc_cmbYear);
+		
+		JLabel label = new JLabel("/");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.fill = GridBagConstraints.VERTICAL;
+		gbc_label.insets = new Insets(0, 0, 0, 5);
+		gbc_label.gridx = 1;
+		gbc_label.gridy = 0;
+		panel.add(label, gbc_label);
+		
+		cmbMon = new JComboBox();
+		cmbMon.setModel(new DefaultComboBoxModel(months));
+		cmbMon.setSelectedIndex(0);
+		GridBagConstraints gbc_cmbMon = new GridBagConstraints();
+		gbc_cmbMon.fill = GridBagConstraints.BOTH;
+		gbc_cmbMon.insets = new Insets(0, 0, 0, 5);
+		gbc_cmbMon.gridx = 2;
+		gbc_cmbMon.gridy = 0;
+		panel.add(cmbMon, gbc_cmbMon);
+		
+		JLabel label_1 = new JLabel("/");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		gbc_label_1.fill = GridBagConstraints.VERTICAL;
+		gbc_label_1.insets = new Insets(0, 0, 0, 5);
+		gbc_label_1.gridx = 3;
+		gbc_label_1.gridy = 0;
+		panel.add(label_1, gbc_label_1);
+		
+		cmbDay = new JComboBox();
+		cmbDay.setModel(new DefaultComboBoxModel(days));
 		cmbDay.setSelectedIndex(0);
-		panel.add(cmbDay);
+		GridBagConstraints gbc_cmbDay = new GridBagConstraints();
+		gbc_cmbDay.fill = GridBagConstraints.BOTH;
+		gbc_cmbDay.gridx = 4;
+		gbc_cmbDay.gridy = 0;
+		panel.add(cmbDay, gbc_cmbDay);
 		
 		JPanel panelBoton = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelBoton.getLayout();
@@ -228,6 +292,11 @@ public class VistaAgregarPersona extends JFrame {
 		getContentPane().add(panelBoton, BorderLayout.SOUTH);
 		
 		JButton btnAgregar = new JButton("Agregar Persona");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonAgregar();
+			}
+		});
 		panelBoton.add(btnAgregar);
 		
 		JLabel lblIngrese = new JLabel("Datos de la Persona:");
