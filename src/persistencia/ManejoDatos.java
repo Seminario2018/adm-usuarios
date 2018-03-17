@@ -42,7 +42,7 @@ public class ManejoDatos {
 		
 	}
 	
-	public ArrayList<String> select(String tabla, String campos){
+	public ArrayList<String> select(String tabla, String campos) {
 		estado = true;
 		ArrayList<String> res = new ArrayList<>();
 		String[] fields = campos.split(", ");
