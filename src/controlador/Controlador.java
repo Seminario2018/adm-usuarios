@@ -21,7 +21,7 @@ import modelo.usuarios.IUsuario;
  */
 public class Controlador implements IControlador {
 
-	private IGestorUsuarios gestorUsuarios = new GestorUsuarios();
+//	private IGestorUsuarios gestorUsuarios = new GestorUsuarios();
 	private IGestorPersonas gestorPersonas = new GestorPersonas();
 	private IGestorRoles gestorRoles = new GestorRoles();
 	private IGestorPermisos gestorPermisos = new GestorPermisos();
