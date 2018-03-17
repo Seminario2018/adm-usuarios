@@ -58,7 +58,7 @@ public class GestorPersonas implements IGestorPersonas {
 		String condicion = "";
 		if(persona.getEstado() == 1) {
 			condicion = "Estado = 1";
-		}else {
+		} else {
 			condicion = "Estado = 0";
 		}
 		if (!persona.getApellido().equals("")) {
@@ -77,11 +77,12 @@ public class GestorPersonas implements IGestorPersonas {
 			condicion += " AND " + s;
 		}
 		ArrayList<IPersona> personas = new ArrayList();
+		System.out.println(condicion);
 		ArrayList<String> per = md.select("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
 				+ " Direccion, Telefono, Estado, Fecha_de_nacimiento", condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
-			System.out.println(split);
+			System.out.println(split[0]);
 			personas.add(new Persona(split[0], split[1], split[2], split[3], split[4], split[5],
 					split[6], Integer.parseInt(split[7]), split[8], null));
 		}
