@@ -79,7 +79,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 		ArrayList<String> per = md.select("usuarios u join personas p ", "u.Nombre, "
 				+ "u.Descripcion, u.Email, u.password, u.Estado", condicion);
 		for (String s: per) {
-			String[] split = s.split(" ");
+			String[] split = s.split(",");
 			usuarios.add(new Usuario(split[0], split[1], split[2], split[3], Integer.parseInt(split[4]), null));
 		}
 		return usuarios;

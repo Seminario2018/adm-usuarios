@@ -58,7 +58,7 @@ public class ManejoDatos {
 					res1 += "\n";
 				}else{
 					for (String s : fields){
-						res1 += resultSet.getString(s) + " ";
+						res1 += resultSet.getString(s) + ",";
 					}
 					res.add(res1);					 
 				}
@@ -94,7 +94,7 @@ public class ManejoDatos {
 					res1 += "\n";
 				}else{
 					for (String s : fields){
-						res1 += resultSet.getString(s) + " ";
+						res1 += resultSet.getString(s) + ",";
 					}
 					res.add(res1);					 
 				}

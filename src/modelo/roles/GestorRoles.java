@@ -72,7 +72,7 @@ public class GestorRoles implements IGestorRoles {
 		ArrayList<IRol> roles = new ArrayList<IRol>();
 		ArrayList<String> per = md.select("roles", "Nombre, Nombre_amigable, Descripcion, Estado", condicion);
 		for (String s: per) {
-			String[] split = s.split(" ");
+			String[] split = s.split(",");
 			roles.add(new Rol(split[0], split[1], split[2], Integer.parseInt(split[3]), null));
 		}
 		return roles;
