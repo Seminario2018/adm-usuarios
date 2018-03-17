@@ -56,6 +56,11 @@ public class GestorPersonas implements IGestorPersonas {
 	public ArrayList<IPersona> buscarPersona(IPersona persona) {
 		ArrayList<String> condiciones = new ArrayList<String>();
 		String condicion = "";
+		if(persona.getEstado() == 1) {
+			condicion = "Estado = 1";
+		}else {
+			condicion = "Estado = 0";
+		}
 		if (!persona.getApellido().equals("")) {
 			condiciones.add("Apellido = '" + persona.getApellido() + "'");
 		}
@@ -73,7 +78,7 @@ public class GestorPersonas implements IGestorPersonas {
 		}
 		ArrayList<IPersona> personas = new ArrayList();
 		ArrayList<String> per = md.select("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
-				+ " Direccion, Telefono, Estado, Fecha_de_nacimiento", "Estado = 1" + condicion);
+				+ " Direccion, Telefono, Estado, Fecha_de_nacimiento", condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
 			personas.add(new Persona(split[0], split[1], split[2], split[3], split[4], split[5],

@@ -50,8 +50,27 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public ArrayList<IRol> buscarRoles(IRol rol) {
+		ArrayList<String> condiciones = new ArrayList<String>();
+		String condicion = "";
+		if(rol.getEstado() == 1) {
+			condicion = "Estado = 1";
+		}else {
+			condicion = "Estado = 0";
+		}
+		if (!rol.getNombreAmigable().equals("")) {
+			condiciones.add("Nombre_amigable = '" + rol.getNombreAmigable() + "'");
+		}
+		if (!rol.getNombre().equals("")) {
+			condiciones.add("Nombre = '" + rol.getNombre() + "'");
+		}
+		if (!rol.getDescripcion().equals("")) {
+			condiciones.add("descripcion = '" + rol.getDescripcion() + "'");
+		}
+		for(String s : condiciones) {
+			condicion += " AND " + s;
+		}
 		ArrayList<IRol> roles = new ArrayList<IRol>();
-		ArrayList<String> per = md.select("roles", "*", "Estado = 1");
+		ArrayList<String> per = md.select("roles", "Nombre, Nombre_amigable, Descripcion, Estado", condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
 			roles.add(new Rol(split[0], split[1], split[2], Integer.parseInt(split[3]), null));

@@ -54,6 +54,11 @@ public class GestorUsuarios implements IGestorUsuarios {
 	public ArrayList<IUsuario> buscarUsuario(IUsuario usuario, IPersona persona) {
 		ArrayList<String> condiciones = new ArrayList<String>();
 		String condicion = "";
+		if(persona.getEstado() == 1) {
+			condicion = "u.Estado = 1";
+		}else {
+			condicion = "u.Estado = 0";
+		}
 		if (!persona.getApellido().equals("")) {
 			condiciones.add("p.Apellido = '" + persona.getApellido() + "'");
 		}
@@ -72,7 +77,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 		
 		ArrayList<IUsuario> usuarios = new ArrayList<IUsuario>();
 		ArrayList<String> per = md.select("usuarios u join personas p ", "u.Nombre, "
-				+ "u.Descripcion, u.Email, u.password, u.Estado", "u.Estado = 1 " + condicion);
+				+ "u.Descripcion, u.Email, u.password, u.Estado", condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
 			usuarios.add(new Usuario(split[0], split[1], split[2], split[3], Integer.parseInt(split[4]), null));
