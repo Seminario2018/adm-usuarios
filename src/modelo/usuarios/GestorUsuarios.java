@@ -54,7 +54,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 	public ArrayList<IUsuario> buscarUsuario(IUsuario usuario, IPersona persona) {
 		ArrayList<String> condiciones = new ArrayList<String>();
 		String condicion = "";
-		if(persona.getEstado() == 1) {
+		if(usuario.getEstado() == 1) {
 			condicion = "u.Estado = 1";
 		}else {
 			condicion = "u.Estado = 0";
@@ -81,6 +81,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 		for (String s: per) {
 			String[] split = s.split(",");
 			usuarios.add(new Usuario(split[0], split[1], split[2], split[3], Integer.parseInt(split[4]), null));
+			System.out.println(split[0]);
 		}
 		return usuarios;
 	}

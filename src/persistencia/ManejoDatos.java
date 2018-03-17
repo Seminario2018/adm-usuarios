@@ -49,6 +49,7 @@ public class ManejoDatos {
 		Connection c = con.conectar();
 		try {
 			Statement st = c.createStatement();
+			System.out.println("select " + campos + " from " + tabla);
 			ResultSet resultSet = st.executeQuery("select " + campos + " from " + tabla);
 			while (resultSet.next())
 			{
@@ -85,6 +86,7 @@ public class ManejoDatos {
 		try {
 			Statement st = c.createStatement();
 			String query = "select " + campos + " from " + tabla + " where " + condicion;
+			System.out.println(query);
 			ResultSet resultSet = st.executeQuery(query);
 			while (resultSet.next())
 			{
@@ -96,7 +98,8 @@ public class ManejoDatos {
 					for (String s : fields){
 						res1 += resultSet.getString(s) + ",";
 					}
-					res.add(res1);					 
+					res.add(res1);
+					System.out.println(res1);
 				}
 				 
 			}
