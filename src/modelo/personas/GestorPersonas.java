@@ -20,11 +20,12 @@ public class GestorPersonas implements IGestorPersonas {
 	 */
 	@Override
 	public boolean agregarPersona(IPersona persona) {
+		//persona = new Persona("Pepita", "Gonzalez", "DNI", "39586", "Luján", "Maraboto 823", "471762", 1, "2016-06-29", null);
 		md.insertar("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
 				+ "Direccion, Telefono, Estado, Fecha de nacimiento",
 				"'" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getTipoDoc() + "', '"
 				+ persona.getNroDoc() + "', '" + persona.getCiudad() + "', '" + persona.getDireccion() + "', '" + 
-				persona.getTelefono() + "', " + persona.getEstado() + "', '" + persona.getFechaNacimiento() + "'");
+				persona.getTelefono() + "', " + 1 + "', '" + persona.getFechaNacimiento() + "'");
 		return md.isEstado();
 	}
 

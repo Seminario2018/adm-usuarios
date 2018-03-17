@@ -106,7 +106,7 @@ public class ManejoDatos {
 		 ArrayList<String> campos = new ArrayList<String>();
 		 while  (!s.equals("")){
 			 int i = s.indexOf(" ");
-			 int j = s.indexOf(" ", i +1);
+			 int j = s.indexOf(" ", i + 1);
 			 campos.add(s.substring(i + 1, j));
 			 s = s.substring(j + 1);
 		 }

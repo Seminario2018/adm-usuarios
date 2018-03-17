@@ -1,49 +1,42 @@
-package vista.usuarios.pantalla;
+package vista.personas.pantalla;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-
-import modelo.personas.IPersona;
-import modelo.roles.Rol;
-import modelo.usuarios.IUsuario;
-import modelo.usuarios.Usuario;
-import vista.usuarios.control.ControlUsuarios;
-import vista.usuarios.control.IControlUsuarios;
-
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
+import modelo.personas.IPersona;
+import vista.personas.control.ControlPersonas;
+import vista.personas.control.IControlPersonas;
 
 /**
  * @author Martín Tomás Juran
- * @version 1.0, 12 de mar. de 2018
+ * @version 1.0, 16 de mar. de 2018
  */
-public class VistaUsuarios extends JFrame {
+public class VistaPersonas extends JFrame {
 	
-	private IControlUsuarios control = new ControlUsuarios();
-	private ArrayList<IUsuario> usuarios = new ArrayList<IUsuario>();
+	private IControlPersonas control = new ControlPersonas();
+	private ArrayList<IPersona> personas = new ArrayList<IPersona>();
 	
 	private JComboBox<String> cmbTipoDoc;
 	private JComboBox<String> cmbEstado;
@@ -55,119 +48,63 @@ public class VistaUsuarios extends JFrame {
 	private JTable header;
 	private JButton btnModificar;
 	private JButton btnEliminar; 
-	private JButton btnRoles; 
 	
 	private void botonBuscar() {
-		IUsuario u = control.getIUsuario();
-		IPersona p = control.getIPersona();		
 		
-		p.setApellido(txtApellido.getText());
-		p.setNombre(txtNombre.getText());
-		p.setTipoDoc((String) cmbTipoDoc.getSelectedItem());
-		p.setNroDoc(txtNroDoc.getText());
-		
-		u.setNombre(txtUsuario.getText());
-		switch ((String) cmbEstado.getSelectedItem()) {
-		case "Activo":
-			u.setEstado(1);
-			break;
-		default:
-			u.setEstado(0);
-			break;
+	}
+	
+	private void botonAgregar() {
+		VistaAgregarPersona vistaAgregar = new VistaAgregarPersona();
+		vistaAgregar.setVisible(true);
+	}
+	
+	private void botonModificar() {
+		VistaModificarPersona vistaModificar = new VistaModificarPersona(personaSeleccionada());
+		vistaModificar.setVisible(true);
+	}
+	
+	private void botonEliminar() {
+		if (control.eliminarPersona(personaSeleccionada())) {
+			this.personas.remove(personaSeleccionada());
+			actualizarTabla();
 		}
-		
-		//this.usuarios = control.buscarUsuario(u, p);
-		
-		ArrayList<Object[]> rolesU = new ArrayList<Object[]>();
-		Object[] rolU = new Object[2];
-		rolU[0] = new Rol("SUPER", "Super-Usuario", "Todo lo puede", 1, null);
-		rolesU.add(rolU);
-		this.usuarios.add(new Usuario("Pepita", "Coqueta", "pepita@gmail.com", "pepita10", 1, rolesU));
-		this.usuarios.add(new Usuario("José", "El loco", "joseloko@hotmail.com", "josecito", 0, null));
-		
-		actualizarTabla();
 	}
 	
 	private void actualizarTabla() {
-		
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 		table.revalidate();
 		
-		if (usuarios != null) {
-			for (IUsuario u : this.usuarios) {
+		if (personas != null) {
+			for (IPersona p : this.personas) {
 				String[] row = new String[4];
-				row[0] = u.getNombre();
-				row[1] = u.getEmail();
-				row[2] = u.getDescripcion();
-				switch (u.getEstado()) {
-				case 1:
-					row[3] = "Activo";
-					break;
-				default:
-					row[3] = "Inactivo";
-					break;
-				}
+				row[0] = p.getApellido();
+				row[1] = p.getNombre();
+				row[2] = p.getTipoDoc();
+				row[3] = p.getNroDoc();
 				dtm.addRow(row);
 			}
 		}
 	}
 	
-	private void botonAgregar() {
-		VistaAgregarUsuario vistaAgregar = new VistaAgregarUsuario();
-		vistaAgregar.setVisible(true);
+	private void habilitarBotones() {
+		
 	}
 	
-	private void botonModificar() {
-		VistaModificarUsuario vistaModificar =
-				new VistaModificarUsuario(usuarioSeleccionado());
-		vistaModificar.setVisible(true);
-	}
-	
-	private void botonEliminar() {
-		if (control.eliminarUsuario(usuarioSeleccionado())) {
-			this.usuarios.remove(usuarioSeleccionado());
-			actualizarTabla();
-		}
-	}
-	
-	private void botonRoles() {
-		VistaGestionarRoles vistaRoles =
-				new VistaGestionarRoles(usuarioSeleccionado());
-		vistaRoles.setVisible(true);
-	}
-	
-	private IUsuario usuarioSeleccionado() {
-		IUsuario u = null;
+	private IPersona personaSeleccionada() {
+		IPersona p = null;
 		int i = 0;
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-		String nombre = (String) dtm.getValueAt(table.getSelectedRow(), 0);
-		while (i < this.usuarios.size() && u == null) {
-			if (this.usuarios.get(i).getNombre() == nombre)
-				u = this.usuarios.get(i);
+		String nroDoc = (String) dtm.getValueAt(table.getSelectedRow(), 3);
+		while (i < this.personas.size() && p == null) {
+			if (this.personas.get(i).getNroDoc() == nroDoc)
+				p = this.personas.get(i);
 			i++;
 		}
-		return u;
+		return p;
 	}
 	
-	private void habilitarBotones() {
-        if (table.getSelectedRow() == -1) {
-        	btnModificar.setEnabled(false);
-        	btnEliminar.setEnabled(false);
-        	btnRoles.setEnabled(false);
-        } else {
-        	btnModificar.setEnabled(true);
-        	btnEliminar.setEnabled(true);
-        	btnRoles.setEnabled(true);
-        }
-	}
-	
-	public VistaUsuarios() {
-		setTitle("Administración de Usuarios");
-		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		getContentPane().setLayout(new BorderLayout(0, 0));
+	public VistaPersonas() {
 		
 		JPanel busqueda = new JPanel();
 		getContentPane().add(busqueda, BorderLayout.NORTH);
@@ -400,14 +337,6 @@ public class VistaUsuarios extends JFrame {
 		btnEliminar.setEnabled(false);
 		panel.add(btnEliminar);
 		
-		btnRoles = new JButton("Roles");
-		btnRoles.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				botonRoles();
-			}
-		});
-		btnRoles.setEnabled(false);
-		panel.add(btnRoles);
 	}
 
 }
