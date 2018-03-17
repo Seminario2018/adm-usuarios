@@ -40,7 +40,7 @@ public class VistaPersonas extends JFrame {
 	
 	private JComboBox<String> cmbTipoDoc;
 	private JComboBox<String> cmbEstado;
-	private JTextField txtUsuario;
+	private JTextField txtDireccion;
 	private JTextField txtApellido;
 	private JTextField txtNombre;
 	private JTextField txtNroDoc;
@@ -48,6 +48,8 @@ public class VistaPersonas extends JFrame {
 	private JTable header;
 	private JButton btnModificar;
 	private JButton btnEliminar; 
+	private JTextField txtTelefono;
+	private JTextField txtCiudad;
 	
 	private void botonBuscar() {
 		
@@ -105,6 +107,7 @@ public class VistaPersonas extends JFrame {
 	}
 	
 	public VistaPersonas() {
+		setTitle("Administración de Personas");
 		
 		JPanel busqueda = new JPanel();
 		getContentPane().add(busqueda, BorderLayout.NORTH);
@@ -115,22 +118,39 @@ public class VistaPersonas extends JFrame {
 		gbl_busqueda.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		busqueda.setLayout(gbl_busqueda);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
-		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
-		gbc_lblUsuario.anchor = GridBagConstraints.EAST;
-		gbc_lblUsuario.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUsuario.gridx = 0;
-		gbc_lblUsuario.gridy = 0;
-		busqueda.add(lblUsuario, gbc_lblUsuario);
+		JLabel lblDireccin = new JLabel("Dirección");
+		GridBagConstraints gbc_lblDireccin = new GridBagConstraints();
+		gbc_lblDireccin.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDireccin.anchor = GridBagConstraints.EAST;
+		gbc_lblDireccin.gridx = 0;
+		gbc_lblDireccin.gridy = 0;
+		busqueda.add(lblDireccin, gbc_lblDireccin);
 		
-		txtUsuario = new JTextField();
-		txtUsuario.setColumns(10);
-		GridBagConstraints gbc_txtUsuario = new GridBagConstraints();
-		gbc_txtUsuario.insets = new Insets(0, 0, 5, 5);
-		gbc_txtUsuario.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtUsuario.gridx = 1;
-		gbc_txtUsuario.gridy = 0;
-		busqueda.add(txtUsuario, gbc_txtUsuario);
+		txtDireccion = new JTextField();
+		txtDireccion.setColumns(10);
+		GridBagConstraints gbc_txtDireccion = new GridBagConstraints();
+		gbc_txtDireccion.insets = new Insets(0, 0, 5, 5);
+		gbc_txtDireccion.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtDireccion.gridx = 1;
+		gbc_txtDireccion.gridy = 0;
+		busqueda.add(txtDireccion, gbc_txtDireccion);
+		
+		JLabel lblCiudad = new JLabel("Ciudad");
+		GridBagConstraints gbc_lblCiudad = new GridBagConstraints();
+		gbc_lblCiudad.anchor = GridBagConstraints.EAST;
+		gbc_lblCiudad.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCiudad.gridx = 2;
+		gbc_lblCiudad.gridy = 0;
+		busqueda.add(lblCiudad, gbc_lblCiudad);
+		
+		txtCiudad = new JTextField();
+		GridBagConstraints gbc_txtCiudad = new GridBagConstraints();
+		gbc_txtCiudad.insets = new Insets(0, 0, 5, 0);
+		gbc_txtCiudad.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtCiudad.gridx = 3;
+		gbc_txtCiudad.gridy = 0;
+		busqueda.add(txtCiudad, gbc_txtCiudad);
+		txtCiudad.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
@@ -149,6 +169,23 @@ public class VistaPersonas extends JFrame {
 		gbc_cmbEstado.gridx = 1;
 		gbc_cmbEstado.gridy = 1;
 		busqueda.add(cmbEstado, gbc_cmbEstado);
+		
+		JLabel lblTelfono = new JLabel("Teléfono");
+		GridBagConstraints gbc_lblTelfono = new GridBagConstraints();
+		gbc_lblTelfono.anchor = GridBagConstraints.EAST;
+		gbc_lblTelfono.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTelfono.gridx = 2;
+		gbc_lblTelfono.gridy = 1;
+		busqueda.add(lblTelfono, gbc_lblTelfono);
+		
+		txtTelefono = new JTextField();
+		GridBagConstraints gbc_txtTelefono = new GridBagConstraints();
+		gbc_txtTelefono.insets = new Insets(0, 0, 5, 0);
+		gbc_txtTelefono.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtTelefono.gridx = 3;
+		gbc_txtTelefono.gridy = 1;
+		busqueda.add(txtTelefono, gbc_txtTelefono);
+		txtTelefono.setColumns(10);
 		
 		JLabel lblApellido = new JLabel("Apellido");
 		GridBagConstraints gbc_lblApellido = new GridBagConstraints();
@@ -241,30 +278,33 @@ public class VistaPersonas extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Usuario", "Email", "Descripcion", "Estado"
+				"Nombre", "Apellido", "Tipo de Documento", "N\u00FAmero de Documento", "Ciudad", "Direcci\u00F3n", "Tel\u00E9fono", "Fecha de Nacimiento", "Estado"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-					false, false, false, false
-				};
+				false, false, false, false, false, false, false, false, false
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
 		
 		DefaultTableModel dtm = (DefaultTableModel) header.getModel();
-		String[] head = new String[4];
-		head[0] = "Usuario";
-		head[1] = "Email";
-		head[2] = "Descripción";
-		head[3] = "Estado";
-		dtm.addRow(head);
+		/*String[] head = new String[9];
+		head[0] = "Nombre";
+		head[1] = "Apellido";
+		head[2] = "Tipo de Documento";
+		head[3] = "Número de Documento";
+		head[4] = "Ci"*/
+		dtm.addRow(new String[] {
+				"Nombre", "Apellido", "Tipo de Documento", "Número de Documento", "Ciudad", "Dirección", "Teléfono", "Fecha de Nacimiento", "Estado"
+			});
 		
 		resultado.setLayout(new BorderLayout(0, 0));
 		header.setFocusable(false);
