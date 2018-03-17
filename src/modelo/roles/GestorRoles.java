@@ -22,7 +22,7 @@ public class GestorRoles implements IGestorRoles {
 	public boolean agregarRol(IRol rol) {
 		md.insertar("roles", "Nombre, Nombre_amigable, Descripcion, Estado", "'"
 			+ rol.getNombre() +	"', '" + rol.getNombreAmigable() + "', '" + 
-			rol.getDescripcion() + "', 0");
+			rol.getDescripcion() + "', 1");
 		return md.isEstado();
 	}
 

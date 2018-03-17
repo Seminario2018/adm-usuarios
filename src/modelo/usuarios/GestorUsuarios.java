@@ -23,7 +23,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 	public boolean agregarUsuario(IPersona persona, IUsuario usuario) {
 		md.insertar("usuarios", "Nombre, Descripcion, Email, password, Estado, persona",
 				"'" + usuario.getNombre() + "', '" + usuario.getDescripcion() + "', '" + usuario.getEmail() + "', '" 
-				+ usuario.getPassword() + "', 0, '" + persona.getNroDoc());
+				+ usuario.getPassword() + "', 1, '" + persona.getNroDoc());
 		return md.isEstado();
 	}
 
