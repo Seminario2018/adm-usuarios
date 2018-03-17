@@ -54,8 +54,26 @@ public class GestorPersonas implements IGestorPersonas {
 	 */
 	@Override
 	public ArrayList<IPersona> buscarPersona(IPersona persona) {
+		ArrayList<String> condiciones = new ArrayList<String>();
+		String condicion = "";
+		if (!persona.getApellido().equals("")) {
+			condiciones.add("Apellido = '" + persona.getApellido() + "'");
+		}
+		if (!persona.getNombre().equals("")) {
+			condiciones.add("Nombre = '" + persona.getNombre() + "'");
+		}
+		if (!persona.getTipoDoc().equals("")) {
+			condiciones.add("tipo_doc = '" + persona.getTipoDoc() + "'");
+		}
+		if (!persona.getNroDoc().equals("")) {
+			condiciones.add("nro_doc = '" + persona.getNroDoc() + "'");
+		}
+		for(String s : condiciones) {
+			condicion += " AND " + s;
+		}
 		ArrayList<IPersona> personas = new ArrayList();
-		ArrayList<String> per = md.select("personas", "*", "Estado = 1");
+		ArrayList<String> per = md.select("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
+				+ " Direccion, Telefono, Estado, Fecha_de_nacimiento", "Estado = 1" + condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
 			personas.add(new Persona(split[0], split[1], split[2], split[3], split[4], split[5],

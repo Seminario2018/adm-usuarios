@@ -23,7 +23,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 	public boolean agregarUsuario(IPersona persona, IUsuario usuario) {
 		md.insertar("usuarios", "Nombre, Descripcion, Email, password, Estado, persona",
 				"'" + usuario.getNombre() + "', '" + usuario.getDescripcion() + "', '" + usuario.getEmail() + "', '" 
-				+ usuario.getPassword() + "', 1, '" + persona.getNroDoc());
+				+ usuario.getPassword() + "', 1, '" + persona.getNroDoc() + "'");
 		return md.isEstado();
 	}
 
@@ -52,8 +52,27 @@ public class GestorUsuarios implements IGestorUsuarios {
 	 */
 	@Override
 	public ArrayList<IUsuario> buscarUsuario(IUsuario usuario, IPersona persona) {
+		ArrayList<String> condiciones = new ArrayList<String>();
+		String condicion = "";
+		if (!persona.getApellido().equals("")) {
+			condiciones.add("p.Apellido = '" + persona.getApellido() + "'");
+		}
+		if (!persona.getNombre().equals("")) {
+			condiciones.add("p.Nombre = '" + persona.getNombre() + "'");
+		}
+		if (!persona.getNroDoc().equals("")) {
+			condiciones.add("p.nro_doc = '" + persona.getNroDoc() + "'");
+		}
+		if (!usuario.getNombre().equals("")) {
+			condiciones.add("u.nombre = '" + persona.getApellido() + "'");
+		}
+		for(String s : condiciones) {
+			condicion += " AND " + s;
+		}
+		
 		ArrayList<IUsuario> usuarios = new ArrayList<IUsuario>();
-		ArrayList<String> per = md.select("roles", "*", "Estado = 1");
+		ArrayList<String> per = md.select("usuarios u join personas p ", "u.Nombre, "
+				+ "u.Descripcion, u.Email, u.password, u.Estado", "u.Estado = 1 " + condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
 			usuarios.add(new Usuario(split[0], split[1], split[2], split[3], Integer.parseInt(split[4]), null));

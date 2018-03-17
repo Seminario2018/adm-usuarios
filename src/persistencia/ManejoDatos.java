@@ -45,7 +45,7 @@ public class ManejoDatos {
 	public ArrayList<String> select(String tabla, String campos){
 		estado = true;
 		ArrayList<String> res = new ArrayList<>();
-		ArrayList<String> fields = parsear(campos);
+		String[] fields = campos.split(", ");
 		Connection c = con.conectar();
 		try {
 			Statement st = c.createStatement();
@@ -76,15 +76,16 @@ public class ManejoDatos {
 	
 	public ArrayList<String> select(String tabla, String campos, String condicion){
 		estado = true;
-		ArrayList<String> fields = new ArrayList<String>();
+		String[] fields = new String[1];
 		ArrayList<String> res = new ArrayList<>();
-		if (!tabla.equals(tabla)) {
-			fields = parsear(campos);
+		if (!(campos.equals("*"))) {
+			fields = campos.split(", ");
 		}
 		Connection c = con.conectar();
 		try {
 			Statement st = c.createStatement();
-			ResultSet resultSet = st.executeQuery("select " + campos + " from " + tabla + " where " + condicion);
+			String query = "select " + campos + " from " + tabla + " where " + condicion;
+			ResultSet resultSet = st.executeQuery(query);
 			while (resultSet.next())
 			{
 				String res1 = "";
@@ -110,9 +111,9 @@ public class ManejoDatos {
 	public ArrayList<String> parsear(String s){
 		 ArrayList<String> campos = new ArrayList<String>();
 		 while  (!s.equals("")){
-			 int i = s.indexOf(" ");
-			 int j = s.indexOf(" ", i + 1);
-			 campos.add(s.substring(i + 1, j));
+			 int j = s.indexOf(" ");
+			 String st = s.substring(j);
+			 campos.add(st);
 			 s = s.substring(j + 1);
 		 }
 		 return campos;
@@ -124,7 +125,7 @@ public class ManejoDatos {
 		String query = "update " + tabla + " on " + campos;	
 		try {
 			Statement st = c.createStatement();
-			st.executeQuery(query);
+			st.execute(query);
 		}
 		catch(Exception e){
 			estado = true;
@@ -137,16 +138,18 @@ public class ManejoDatos {
 	}
 	
 	public String update(String tabla,String campos, String condicion) {
+		estado = true;
 		String s = "Se actualizo correctamente la tabla";
 		Connection c = con.conectar();
-		String query = "update " + tabla + " on " + campos + " Where " + condicion;	
+		String query = "update " + tabla + " set " + campos + " where " + condicion;	
 		try {
 			Statement st = c.createStatement();
-			st.executeQuery(query);
+			st.execute(query);
 		}
 		catch(Exception e){
-			estado = true;
-			s = "Error al insertar la fila"; 
+			estado = false;
+			e.printStackTrace();
+			s = "Error al actualizar la fila"; 
 		}finally {
 			con.desconectar();
 		}
