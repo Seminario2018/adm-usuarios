@@ -38,18 +38,19 @@ public class VistaPersonas extends JFrame {
 	private IControlPersonas control = new ControlPersonas();
 	private ArrayList<IPersona> personas = new ArrayList<IPersona>();
 	
-	private JComboBox<String> cmbTipoDoc;
 	private JComboBox<String> cmbEstado;
+	private JComboBox<String> cmbTipoDoc;
 	private JTextField txtDireccion;
 	private JTextField txtApellido;
 	private JTextField txtNombre;
 	private JTextField txtNroDoc;
+	private JTextField txtTelefono;
+	private JTextField txtCiudad;
 	private JTable table;
 	private JTable header;
 	private JButton btnModificar;
 	private JButton btnEliminar; 
-	private JTextField txtTelefono;
-	private JTextField txtCiudad;
+
 	
 	private void botonBuscar() {
 		
