@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
+import modelo.roles.IRol;
 
 /**
  * @author Javier El�as G�mez Vicente
@@ -19,10 +20,10 @@ public class ControlAgregarPermiso implements IControlAgregarPermiso {
 	/**
 	 * @param control
 	 */
-	public ControlAgregarPermiso(IControlador control) {
+	/*public ControlAgregarPermiso(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see vista.permisos.control.IControlAgregarPermiso#agregarPermiso(modelo.permisos.IPermiso)
@@ -45,7 +46,7 @@ public class ControlAgregarPermiso implements IControlAgregarPermiso {
             return false;
         } else {
             if (control.agregarPermiso(permiso)) {
-                JOptionPane.showMessageDialog(null, "El usuario se agregó con éxito");
+                JOptionPane.showMessageDialog(null, "El permiso se agregó con éxito");
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Hubo un problema al agregar al usuario");
@@ -60,6 +61,11 @@ public class ControlAgregarPermiso implements IControlAgregarPermiso {
 	@Override
 	public IPermiso getIPermiso() {
 		return control.getIPermiso();
+	}
+
+	@Override
+	public IRol getIRol() {
+		return control.getIRol();
 	}
 
 }
