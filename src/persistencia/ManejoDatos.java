@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class ManejoDatos {
 	private Conexion con;
-	private boolean estado = false;
+	private boolean estado = true;
 	
 	public boolean isEstado() {
 		return estado;
@@ -22,6 +22,7 @@ public class ManejoDatos {
 	}
 	
 	public String insertar(String tabla, String campos, String valores) {
+		estado = true;
 		String s = "Se inserto la fila correctamente";
 		Connection c = con.conectar();
 		String query = "insert into " + tabla + " (" + campos + ") values (" + valores + ")";	
@@ -30,7 +31,7 @@ public class ManejoDatos {
 			st.executeQuery(query);
 		}
 		catch(Exception e){
-			estado = true;
+			estado = false;
 			s = "Error al insertar la fila"; 
 		}finally {
 			con.desconectar();
@@ -40,6 +41,7 @@ public class ManejoDatos {
 	}
 	
 	public ArrayList<String> select(String tabla, String campos){
+		estado = true;
 		ArrayList<String> res = new ArrayList<>();
 		ArrayList<String> fields = parsear(campos);
 		Connection c = con.conectar();
@@ -61,6 +63,7 @@ public class ManejoDatos {
 				 
 			}
 		} catch (SQLException e) {
+			estado = false;
 			e.printStackTrace();
 		}finally {
 			c = null;
@@ -70,6 +73,7 @@ public class ManejoDatos {
 	}
 	
 	public ArrayList<String> select(String tabla, String campos, String condicion){
+		estado = true;
 		ArrayList<String> res = new ArrayList<>();
 		ArrayList<String> fields = parsear(campos);
 		Connection c = con.conectar();
@@ -91,6 +95,7 @@ public class ManejoDatos {
 				 
 			}
 		} catch (SQLException e) {
+			estado = false;
 			e.printStackTrace();
 		}
 		return res;
