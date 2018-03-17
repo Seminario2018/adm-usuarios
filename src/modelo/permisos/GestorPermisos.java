@@ -54,7 +54,7 @@ public class GestorPermisos implements IGestorPermisos {
 			condicion = "Estado = 0";
 		}
 		if (!permiso.getFuncionalidad().equals("")) {
-			condiciones.add("funcionalidad = '" + permiso.getFuncionalidad() + "'";
+			condiciones.add("funcionalidad = '" + permiso.getFuncionalidad() + "'");
 		}
 		if (!permiso.getNombre().equals("")) {
 			condiciones.add("Nombre = '" + permiso.getNombre() + "'");
