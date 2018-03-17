@@ -55,13 +55,13 @@ public class VistaGestionarPermisos extends JFrame {
 	private JButton btnSuprimir;
 
 	private void botonAsignar() {
-		if (control.asignarPermiso(this.rol, this.permisoSeleccionadoAsig())) {
+		if (control.asignarPermiso(this.rol, permisoSeleccionado())) {
 			actualizarTablaR();
 		}
 	}
-	
+
 	private void botonSuprimir() {
-		if (control.suprimirPermiso(this.rol, this.permisoSeleccionadoSup())) {
+		if (control.suprimirPermiso(this.rol, permisoSeleccionado())) {
 			actualizarTablaR();
 		}
 	}
@@ -76,42 +76,26 @@ public class VistaGestionarPermisos extends JFrame {
 		permiso.setNombre(txtNombre.getText());
 		switch ((String) cmbEstado.getSelectedItem()) {
 		case "Activo":
-			rol.setEstado(1);
+			permiso.setEstado(1);
 			break;
 		default:
-			rol.setEstado(0);
+			permiso.setEstado(0);
 			break;
 		}
-		permiso.setFuncionalidad("");
-		permiso.setDescripcion("");
-		permiso.setEstado(1);
-		permiso.setNombre(this.txtNombre.getText());
+
 		this.permisos = this.control.buscarPermisos(permiso);
 		
 		actualizarTablaP();
 		actualizarTablaR();
 	}
 	
-	private IPermiso permisoSeleccionadoAsig() {
-		IPermiso p = null;
-		int i = 0;
-		DefaultTableModel dtm = (DefaultTableModel) tabler.getModel();
-		String nombre = (String) dtm.getValueAt(tabler.getSelectedRow(), 0);
-		while (i < this.permisos.size() && p == null) {
-			if (this.permisos.get(i).getNombre() == nombre)
-				p = this.permisos.get(i);
-			i++;
-		}
-		return p;
-	}
-	
-	private IPermiso permisoSeleccionadoSup() {
+	private IPermiso permisoSeleccionado() {
 		IPermiso p = null;
 		int i = 0;
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		String nombre = (String) dtm.getValueAt(table.getSelectedRow(), 0);
 		while (i < this.permisos.size() && p == null) {
-			if (this.permisos.get(i).getNombre() == nombre)
+			if(this.permisos.get(i).getNombre() == nombre)
 				p = this.permisos.get(i);
 			i++;
 		}
@@ -119,9 +103,9 @@ public class VistaGestionarPermisos extends JFrame {
 	}
 	
 	private void actualizarTablaP() {
-		DefaultTableModel dtm = (DefaultTableModel) tabler.getModel();
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
-		tabler.revalidate();
+		table.revalidate();
 		
 		if (this.permisos != null) {
 			for (IPermiso p : this.permisos) {
@@ -154,18 +138,13 @@ public class VistaGestionarPermisos extends JFrame {
 	}
 	
 	private void habilitarBotones() {
-		 if (tabler.getSelectedRow() == -1) {
+		 if (table.getSelectedRow() == -1) {
 			 btnAsignar.setEnabled(false);
-			 //btnSuprimir.setEnabled(false);
+			 btnSuprimir.setEnabled(false);
 	     } else {
 	    	 btnAsignar.setEnabled(true);
-	    	 //btnSuprimir.setEnabled(true);
+	    	 btnSuprimir.setEnabled(true);
 	     }
-		 if (table.getSelectedRow() == -1) {
-			 btnSuprimir.setEnabled(false);
-		 }else {
-			 btnSuprimir.setEnabled(true);
-		 }
 	}
 	
 	public VistaGestionarPermisos(IRol rol) {
@@ -220,12 +199,6 @@ public class VistaGestionarPermisos extends JFrame {
 		panelRol.add(headerr, BorderLayout.NORTH);
 		
 		tabler = new JTable();
-		tabler.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				habilitarBotones();
-			}
-		});
 		tabler.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
@@ -311,9 +284,9 @@ public class VistaGestionarPermisos extends JFrame {
 		panelPermiso.add(header, BorderLayout.NORTH);
 		panelPermiso.add(table);
 		
-		JLabel lblRolesDisponibles = new JLabel("Permisos disponibles");
-		lblRolesDisponibles.setHorizontalAlignment(SwingConstants.CENTER);
-		panelPermiso.add(lblRolesDisponibles, BorderLayout.SOUTH);
+		JLabel lblPermisosDisponibles = new JLabel("Permisos disponibles");
+		lblPermisosDisponibles.setHorizontalAlignment(SwingConstants.CENTER);
+		panelPermiso.add(lblPermisosDisponibles, BorderLayout.SOUTH);
 		
 		JPanel panelBotones = new JPanel();
 		GridBagConstraints gbc_panelBotones = new GridBagConstraints();
@@ -374,5 +347,7 @@ public class VistaGestionarPermisos extends JFrame {
 		cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
 		cmbEstado.setSelectedIndex(0);
 		panel.add(cmbEstado);
+		
+		actualizarTablaR();
 	}
 }
