@@ -46,8 +46,27 @@ public class GestorPermisos implements IGestorPermisos {
 	 */
 	@Override
 	public ArrayList<IPermiso> buscarPermiso(IPermiso permiso) {
+		ArrayList<String> condiciones = new ArrayList<String>();
+		String condicion = "";
+		if(permiso.getEstado() == 1) {
+			condicion = "Estado = 1";
+		}else {
+			condicion = "Estado = 0";
+		}
+		if (!permiso.getFuncionalidad().equals("")) {
+			condiciones.add("funcionalidad = '" + permiso.getFuncionalidad() + "'");
+		}
+		if (!permiso.getNombre().equals("")) {
+			condiciones.add("Nombre = '" + permiso.getNombre() + "'");
+		}
+		if (!permiso.getDescripcion().equals("")) {
+			condiciones.add("descripcion = '" + permiso.getDescripcion() + "'");
+		}
+		for(String s : condiciones) {
+			condicion += " AND " + s;
+		}
 		ArrayList<IPermiso> permisos = new ArrayList();
-		ArrayList<String> per = md.select("permisos", "*", "Estado = 1");
+		ArrayList<String> per = md.select("permisos", "Nombre, Funcionalidad, Estado, Descripcion", condicion);
 		for (String s: per) {
 			String[] split = s.split(" ");
 			permisos.add(new Permiso(split[0], split[1], split[2], Integer.parseInt(split[3])));
