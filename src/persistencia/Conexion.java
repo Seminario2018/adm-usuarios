@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 
 public class Conexion {
 	
@@ -44,7 +44,7 @@ public class Conexion {
 	public Connection conectar() {
 		try {
 			Class.forName(driver);
-			conn = (Connection) DriverManager.getConnection(url, user, pass);
+			conn = DriverManager.getConnection(url, user, pass);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
