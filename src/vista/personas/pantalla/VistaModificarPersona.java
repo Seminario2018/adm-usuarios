@@ -57,19 +57,19 @@ private IControlAgregarPersona control = new ControlAgregarPersona();
 					.equals((String) cmbTipoDoc.getItemAt(i));
 			i++;
 		}
-		i = b ? i-- : 0;
+		i = b ? --i : 0;
 		cmbTipoDoc.setSelectedIndex(i);
 		
 		int year = Integer.valueOf(this.persona.getFechaNacimiento().substring(0, 4));
 		int month = Integer.valueOf(this.persona.getFechaNacimiento().substring(5, 7));
 		int day = Integer.valueOf(this.persona.getFechaNacimiento().substring(8, 10));
 		
-		cmbYear.setSelectedIndex(year);
-		cmbMon.setSelectedIndex(month);
-		cmbDay.setSelectedIndex(day);
+		cmbYear.setSelectedIndex(2018 - year);
+		cmbMon.setSelectedIndex(month-1);
+		cmbDay.setSelectedIndex(day-1);
 	}
 	
-	private void botonAgregar() {
+	private void botonModificar() {
 		/*
 		control.agregarPersona(new Persona("Pepita", "Gonzalez", "DNI", "12",
 				"Luján", "Maraboto 823", "471762", 1, "2016-06-29", null));
@@ -319,13 +319,13 @@ private IControlAgregarPersona control = new ControlAgregarPersona();
 		flowLayout.setAlignment(FlowLayout.TRAILING);
 		getContentPane().add(panelBoton, BorderLayout.SOUTH);
 		
-		JButton btnAgregar = new JButton("Modificar Persona");
-		btnAgregar.addActionListener(new ActionListener() {
+		JButton btnModificar = new JButton("Modificar Persona");
+		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				botonAgregar();
+				botonModificar();
 			}
 		});
-		panelBoton.add(btnAgregar);
+		panelBoton.add(btnModificar);
 		
 		JLabel lblIngrese = new JLabel("Datos de la Persona:");
 		lblIngrese.setHorizontalAlignment(SwingConstants.CENTER);

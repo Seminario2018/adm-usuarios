@@ -26,6 +26,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.personas.IPersona;
+import modelo.personas.Persona;
 import vista.personas.control.ControlPersonas;
 import vista.personas.control.IControlPersonas;
 
@@ -74,7 +75,11 @@ public class VistaPersonas extends JFrame {
 		}
 		
 		this.personas = this.control.buscarPersona(p);
-		
+		/*
+		IPersona p2 = new Persona("Pepita", "Gonzalez", "DNI", "12",
+				"Luján", "Maraboto 823", "471762", 1, "2016-06-29", null);
+		personas.add(p2);
+		*/
 		actualizarTabla();
 	}
 	
@@ -102,11 +107,25 @@ public class VistaPersonas extends JFrame {
 		
 		if (personas != null) {
 			for (IPersona p : this.personas) {
-				String[] row = new String[4];
-				row[0] = p.getApellido();
-				row[1] = p.getNombre();
+				String[] row = new String[9];
+				row[0] = p.getNombre();
+				row[1] = p.getApellido();
 				row[2] = p.getTipoDoc();
 				row[3] = p.getNroDoc();
+				row[4] = p.getCiudad();
+				row[5] = p.getDireccion();
+				row[6] = p.getTelefono();
+				row[7] = p.getFechaNacimiento();
+				
+				switch (p.getEstado()) {
+				case 1:	
+					row[8] = "Activo";
+					break;
+				default:
+					row[8] = "Inactivo";
+					break;
+				}
+				
 				dtm.addRow(row);
 			}
 		}
