@@ -19,10 +19,10 @@ public class ControlModificarPermiso implements IControlModificarPermiso {
 	/**
 	 * @param control
 	 */
-	public ControlModificarPermiso(IControlador control) {
+	/*public ControlModificarPermiso(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see vista.permisos.control.IControlModificarPermiso#modificarPermiso(modelo.permisos.IPermiso)

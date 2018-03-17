@@ -5,21 +5,22 @@ package vista.permisos.control;
 
 import java.util.ArrayList;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
 
 /**
- * @author Javier Elías Gómez Vicente
+ * @author Javier Elï¿½as Gï¿½mez Vicente
  *
  */
 public class ControlPermisos implements IControlPermisos {
 	
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
-	public ControlPermisos(IControlador control) {
+/*	public ControlPermisos(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 	
 	/* (non-Javadoc)
 	 * @see vista.permisos.control.IControlPermisos#buscarPermiso(modelo.permisos.IPermiso)
