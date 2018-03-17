@@ -35,4 +35,6 @@ public interface IControlGestionarPermisos {
 	 * <strong>False</strong> en otro caso
 	 */
 	public boolean suprimirPermiso(IRol rol, IPermiso permiso);
+	
+	public IPermiso getIPermiso();
 }

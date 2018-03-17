@@ -5,24 +5,25 @@ package vista.roles.control;
 
 import java.util.ArrayList;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.roles.IRol;
 
 /**
- * @author Javier Elias Gómez Vicente
+ * @author Javier Elias Gï¿½mez Vicente
  *
  */
 public class ControlRoles implements IControlRoles {
 	
-	IControlador control;
+	IControlador control = new Controlador();
 	
 	/**
 	 * @param control
 	 */
-	public ControlRoles(IControlador control) {
+/*	public ControlRoles(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlRoles#buscarRoles(modelo.roles.IRol)
