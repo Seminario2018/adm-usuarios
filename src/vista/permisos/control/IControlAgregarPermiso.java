@@ -1,6 +1,7 @@
 package vista.permisos.control;
 
 import modelo.permisos.IPermiso;
+import modelo.roles.IRol;
 
 /**
  * @author Martín Tomás Juran
@@ -19,4 +20,7 @@ public interface IControlAgregarPermiso {
 	 * @return una plantilla de Permiso vacía
 	 */
 	public IPermiso getIPermiso();
+	
+	public IRol getIRol();
+
 }
