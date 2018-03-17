@@ -53,6 +53,28 @@ public class VistaPersonas extends JFrame {
 	
 	private void botonBuscar() {
 		
+		IPersona p = this.control.getIPersona();		
+		
+		p.setDireccion(txtDireccion.getText());
+		p.setCiudad(txtCiudad.getText());
+		p.setTelefono(txtTelefono.getText());
+		p.setApellido(txtApellido.getText());
+		p.setNombre(txtNombre.getText());
+		p.setTipoDoc((String) cmbTipoDoc.getSelectedItem());
+		p.setNroDoc(txtNroDoc.getText());
+		
+		switch ((String) cmbEstado.getSelectedItem()) {
+		case "Activo":
+			p.setEstado(1);
+			break;
+		default:
+			p.setEstado(0);
+			break;
+		}
+		
+		this.personas = this.control.buscarPersona(p);
+		
+		actualizarTabla();
 	}
 	
 	private void botonAgregar() {
@@ -90,7 +112,13 @@ public class VistaPersonas extends JFrame {
 	}
 	
 	private void habilitarBotones() {
-		
+		if (table.getSelectedRow() == -1) {
+			btnModificar.setEnabled(false);
+        	btnEliminar.setEnabled(false);
+        } else {
+        	btnModificar.setEnabled(true);
+        	btnEliminar.setEnabled(true);
+        }
 	}
 	
 	private IPersona personaSeleccionada() {
@@ -108,6 +136,8 @@ public class VistaPersonas extends JFrame {
 	
 	public VistaPersonas() {
 		setTitle("Administración de Personas");
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel busqueda = new JPanel();
 		getContentPane().add(busqueda, BorderLayout.NORTH);
@@ -296,14 +326,15 @@ public class VistaPersonas extends JFrame {
 		});
 		
 		DefaultTableModel dtm = (DefaultTableModel) header.getModel();
-		/*String[] head = new String[9];
-		head[0] = "Nombre";
-		head[1] = "Apellido";
-		head[2] = "Tipo de Documento";
-		head[3] = "Número de Documento";
-		head[4] = "Ci"*/
 		dtm.addRow(new String[] {
-				"Nombre", "Apellido", "Tipo de Documento", "Número de Documento", "Ciudad", "Dirección", "Teléfono", "Fecha de Nacimiento", "Estado"
+				"Nombre",
+				"Apellido",
+				"Tipo de Documento",
+				"Número de Documento",
+				"Ciudad", "Dirección",
+				"Teléfono",
+				"Fecha de Nacimiento",
+				"Estado"
 			});
 		
 		resultado.setLayout(new BorderLayout(0, 0));
@@ -321,26 +352,25 @@ public class VistaPersonas extends JFrame {
 	    });
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
+				{null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Usuario", "Email", "Descripcion", "Estado"
+				"Nombre", "Apellido", "Tipo de Documento", "N\u00FAmero de Documento", "Ciudad", "Direcci\u00F3n", "Tel\u00E9fono", "Fecha de Nacimiento", "Estado"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-					false, false, false, false
-				};
+				false, false, false, false, false, false, false, false, false
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		table.setFillsViewportHeight(true);
 		
 		JPanel botones = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) botones.getLayout();
