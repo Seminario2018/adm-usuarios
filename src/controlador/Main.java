@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
+import vista.permisos.pantalla.VistaPermisos;
 import vista.personas.pantalla.VistaPersonas;
+import vista.roles.pantalla.VistaRoles;
 import vista.usuarios.pantalla.VistaUsuarios;
 
 import javax.swing.JButton;
@@ -83,9 +85,21 @@ public class Main {
 		panel_1.add(btnUsuarios);
 		
 		JButton btnRoles = new JButton("Roles");
+		btnRoles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VistaRoles vistaRoles = new VistaRoles();
+				vistaRoles.setVisible(true);
+			}
+		});
 		panel_1.add(btnRoles);
 		
 		JButton btnPermisos = new JButton("Permisos");
+		btnPermisos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VistaPermisos vistaPermisos = new VistaPermisos();
+				vistaPermisos.setVisible(true);
+			}
+		});
 		panel_1.add(btnPermisos);
 	}
 

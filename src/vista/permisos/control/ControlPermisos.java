@@ -17,10 +17,12 @@ public class ControlPermisos implements IControlPermisos {
 	
 	private IControlador control = new Controlador();
 	
-/*	public ControlPermisos(IControlador control) {
+	/*
+	public ControlPermisos(IControlador control) {
 		super();
 		this.control = control;
-	}*/
+	}
+	*/
 	
 	/* (non-Javadoc)
 	 * @see vista.permisos.control.IControlPermisos#buscarPermiso(modelo.permisos.IPermiso)

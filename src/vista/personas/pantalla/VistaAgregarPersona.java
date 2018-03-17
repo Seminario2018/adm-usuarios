@@ -66,7 +66,7 @@ public class VistaAgregarPersona extends JFrame {
 	}
 	
 	public VistaAgregarPersona() {
-		setTitle("Agregar Usuario");
+		setTitle("Agregar Persona");
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

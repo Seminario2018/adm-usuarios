@@ -18,13 +18,12 @@ public class ControlGestionarPermisos implements IControlGestionarPermisos {
 
 	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
-/*	public ControlGestionarPermisos(IControlador control) {
+	/*
+	public ControlGestionarPermisos(IControlador control) {
 		super();
 		this.control = control;
-	}*/
+	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlGestionarPermisos#buscarPermisos(modelo.permisos.IPermiso)

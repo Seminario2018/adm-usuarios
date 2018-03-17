@@ -29,7 +29,7 @@ public class VistaModificarRol extends JFrame {
 	private JTextField txtDescr;
 	
 	private void llenarCampos() {
-		txtRol.setText(this.rol.getNombre());;
+		txtRol.setText(this.rol.getNombre());
 		txtNAmigable.setText(this.rol.getNombreAmigable());
 		txtDescr.setText(this.rol.getDescripcion());
 	}

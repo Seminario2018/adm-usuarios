@@ -5,6 +5,7 @@ package vista.permisos.control;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
 import modelo.roles.IRol;
@@ -15,15 +16,14 @@ import modelo.roles.IRol;
  */
 public class ControlAgregarPermiso implements IControlAgregarPermiso {
 
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
-	/*public ControlAgregarPermiso(IControlador control) {
+	/*
+	public ControlAgregarPermiso(IControlador control) {
 		super();
 		this.control = control;
-	}*/
+	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.permisos.control.IControlAgregarPermiso#agregarPermiso(modelo.permisos.IPermiso)

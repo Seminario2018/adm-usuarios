@@ -17,13 +17,12 @@ public class ControlRoles implements IControlRoles {
 	
 	IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
-/*	public ControlRoles(IControlador control) {
+	/*
+	public ControlRoles(IControlador control) {
 		super();
 		this.control = control;
-	}*/
+	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlRoles#buscarRoles(modelo.roles.IRol)

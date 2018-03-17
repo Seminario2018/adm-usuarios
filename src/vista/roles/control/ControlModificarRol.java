@@ -5,6 +5,7 @@ package vista.roles.control;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.roles.IRol;
 
@@ -14,15 +15,14 @@ import modelo.roles.IRol;
  */
 public class ControlModificarRol implements IControlModificarRol {
 	
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
-/*	public ControlModificarRol(IControlador control) {
+	/*
+	public ControlModificarRol(IControlador control) {
 		super();
 		this.control = control;
-	}*/
+	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlModificarRol#modificarRol(modelo.roles.IRol)

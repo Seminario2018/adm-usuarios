@@ -5,6 +5,7 @@ package vista.permisos.control;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
 
@@ -14,15 +15,14 @@ import modelo.permisos.IPermiso;
  */
 public class ControlModificarPermiso implements IControlModificarPermiso {
 	
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
-	/*public ControlModificarPermiso(IControlador control) {
+	/*
+	public ControlModificarPermiso(IControlador control) {
 		super();
 		this.control = control;
-	}*/
+	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.permisos.control.IControlModificarPermiso#modificarPermiso(modelo.permisos.IPermiso)
