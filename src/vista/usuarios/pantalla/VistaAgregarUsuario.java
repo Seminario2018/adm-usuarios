@@ -75,11 +75,11 @@ public class VistaAgregarUsuario extends JFrame {
 		p.setNroDoc(txtNroDoc.getText());
 		p.setTipoDoc((String) cmbTipoDoc.getSelectedItem());
 		
-		//this.personas = this.control.buscarPersona(p);
-		
+		this.personas = this.control.buscarPersona(p);
+		/*
 		this.personas.add(new Persona("Pepita", "Corazón", "DNI", "39586150", "Luján", "Maraboto 823", "01140", 1, "1996-06-29", null));
 		this.personas.add(new Persona("José", "Suárez", "DNI", "40283120", "Luján", "Lamberti 862", "232350", 1, "1996-06-29", null));
-		
+		*/
 		actualizarTabla();
 	}
 	

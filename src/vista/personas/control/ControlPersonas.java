@@ -5,24 +5,24 @@ package vista.personas.control;
 
 import java.util.ArrayList;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.personas.IPersona;
 
 /**
- * @author Javier Elias Gómez Vicente
+ * @author Javier Elias Gï¿½mez Vicente
  *
  */
 public class ControlPersonas implements IControlPersonas {
 
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
-	/**
-	 * @param control
-	 */
+	/*
 	public ControlPersonas(IControlador control) {
 		super();
 		this.control = control;
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see vista.personas.control.IControlPersonas#buscarPersona(modelo.personas.IPersona)
