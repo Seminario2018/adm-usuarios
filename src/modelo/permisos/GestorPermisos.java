@@ -18,8 +18,7 @@ public class GestorPermisos implements IGestorPermisos {
 	@Override
 	public boolean agregarPermiso(IPermiso permiso) {
 		md.insertar("permisos","Nombre, Funcionalidad, Estado, Descripcion", "'" + permiso.getNombre() + "', '" 
-				+ permiso.getFuncionalidad()  + "', " + permiso.getEstado() + ", '" 
-				+ permiso.getDescripcion() + "'");
+				+ permiso.getFuncionalidad()  + "', 0, '" + permiso.getDescripcion() + "'");
 		return md.isEstado();
 	}
 

@@ -24,7 +24,7 @@ public class GestorPersonas implements IGestorPersonas {
 				+ "Direccion, Telefono, Estado, Fecha de nacimiento",
 				"'" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getTipoDoc() + "', '"
 				+ persona.getNroDoc() + "', '" + persona.getCiudad() + "', '" + persona.getDireccion() + "', '" + 
-				persona.getTelefono() + "', " + persona.getEstado() + "', '" + persona.getFechaNacimiento() + "'");
+				persona.getTelefono() + "', 1, '" + persona.getFechaNacimiento() + "'");
 		return md.isEstado();
 	}
 
