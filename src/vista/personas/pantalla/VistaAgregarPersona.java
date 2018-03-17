@@ -15,7 +15,7 @@ public class VistaAgregarPersona extends JFrame {
 	private IControlAgregarPersona control = new ControlAgregarPersona();
 	
 	public VistaAgregarPersona() {
-		control.agregarPersona(new Persona("Pepita", "Gonzalez", "DNI", "39586",
+		control.agregarPersona(new Persona("Pepita", "Gonzalez", "DNI", "12",
 				"Luján", "Maraboto 823", "471762", 1, "2016-06-29", null));
 	}
 
