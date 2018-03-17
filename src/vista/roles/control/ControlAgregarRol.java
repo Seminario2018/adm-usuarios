@@ -19,10 +19,10 @@ public class ControlAgregarRol implements IControlAgregarRol {
 	/**
 	 * @param control
 	 */
-	public ControlAgregarRol(IControlador control) {
+	/*public ControlAgregarRol(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlAgregarRol#agregarRol(modelo.roles.IRol)

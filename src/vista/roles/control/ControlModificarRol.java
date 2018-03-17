@@ -19,10 +19,10 @@ public class ControlModificarRol implements IControlModificarRol {
 	/**
 	 * @param control
 	 */
-	public ControlModificarRol(IControlador control) {
+/*	public ControlModificarRol(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlModificarRol#modificarRol(modelo.roles.IRol)

@@ -5,25 +5,26 @@ package vista.roles.control;
 
 import java.util.ArrayList;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.permisos.IPermiso;
 import modelo.roles.IRol;
 
 /**
- * @author Javier Eías Gómez Vicente
+ * @author Javier Eï¿½as Gï¿½mez Vicente
  *
  */
 public class ControlGestionarPermisos implements IControlGestionarPermisos {
 
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
 	/**
 	 * @param control
 	 */
-	public ControlGestionarPermisos(IControlador control) {
+/*	public ControlGestionarPermisos(IControlador control) {
 		super();
 		this.control = control;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see vista.roles.control.IControlGestionarPermisos#buscarPermisos(modelo.permisos.IPermiso)
@@ -47,6 +48,11 @@ public class ControlGestionarPermisos implements IControlGestionarPermisos {
 	@Override
 	public boolean suprimirPermiso(IRol rol, IPermiso permiso) {
 		return control.suprimirPermiso(rol, permiso);
+	}
+
+	@Override
+	public IPermiso getIPermiso() {
+		return control.getIPermiso();
 	}
 
 }
