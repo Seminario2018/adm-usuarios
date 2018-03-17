@@ -68,10 +68,10 @@ public class Usuario implements IUsuario {
 	}
 	public ArrayList<Object[]> getRoles() {
 		ArrayList<Object[]> permisos = new ArrayList<Object[]>();
-		ArrayList<String> per = md.select("roles r join rolesporusuario ru join usuarios u", "fecha_de_asignacion",
-				"u.Estado = 1 AND ru.usuario = u.nombre AND ru.rol = r.nombre");
+		ArrayList<String> per = md.select("roles r join rolesporusuario ru", "Nombre, Nombre_amigable, descripcion, r.estado, fecha_de_asignacion",
+				"ru.Estado = 1 AND ru.rol = r.nombre AND '" + this.getNombre() + "' = ru.usuario");
 		for (String s: per) {
-			String[] split = s.split(" ");
+			String[] split = s.split(" -- ");
 			Object[] o = new Object[2];
 			o[0] = new Rol(split[0], split[1],split[2], Integer.parseInt(split[3]),null);
 			o[1] = split[4];

@@ -19,4 +19,6 @@ public interface IControlAgregarPersona {
 	 * @return una plantilla de Persona vacía
 	 */
 	public IPersona getIPersona();
+
+	
 }

@@ -59,11 +59,10 @@ public class ManejoDatos {
 					res1 += "\n";
 				}else{
 					for (String s : fields){
-<<<<<<< HEAD
+
 						res1 += resultSet.getString(s) + " -- ";
-=======
+
 						res1 += resultSet.getString(s) + ",";
->>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 					}
 					res.add(res1);					 
 				}
@@ -100,11 +99,7 @@ public class ManejoDatos {
 					res1 += "\n";
 				}else{
 					for (String s : fields){
-<<<<<<< HEAD
 						res1 += resultSet.getString(s) + " -- ";
-=======
-						res1 += resultSet.getString(s) + ",";
->>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 					}
 					res.add(res1);
 					System.out.println(res1);

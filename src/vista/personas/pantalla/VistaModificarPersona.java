@@ -19,7 +19,9 @@ import javax.swing.SwingConstants;
 
 import modelo.personas.IPersona;
 import vista.personas.control.ControlAgregarPersona;
+import vista.personas.control.ControlModificarPersona;
 import vista.personas.control.IControlAgregarPersona;
+import vista.personas.control.IControlModificarPersona;
 
 /**
  * @author Martín Tomás Juran
@@ -29,7 +31,8 @@ public class VistaModificarPersona extends JFrame {
 
 	private IPersona persona;
 	
-private IControlAgregarPersona control = new ControlAgregarPersona();
+	private IControlAgregarPersona control = new ControlAgregarPersona();
+	private IControlModificarPersona controlm = new ControlModificarPersona();
 	
 	private JComboBox<String> cmbTipoDoc;
 	private JTextField txtDireccion;
@@ -88,8 +91,7 @@ private IControlAgregarPersona control = new ControlAgregarPersona();
 				(String) cmbMon.getSelectedItem() + "-" +
 				(String) cmbDay.getSelectedItem()
 				);
-		
-		control.agregarPersona(p);
+		controlm.modificarPersona(p);
 	}
 	
 	public VistaModificarPersona(IPersona persona) {

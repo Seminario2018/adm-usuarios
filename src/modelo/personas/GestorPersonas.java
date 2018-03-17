@@ -35,7 +35,7 @@ public class GestorPersonas implements IGestorPersonas {
 	public boolean modificarPersona(IPersona persona) {
 		md.update("personas", "Nombre = '" + persona.getNombre() + "', Apellido = '" + persona.getApellido()
 		+ "', Ciudad = '" + persona.getCiudad() + "', Direccion = '" + persona.getDireccion()
-		+ "', Telefono = '" + persona.getTelefono() + "', Fecha de nacimiento = '" + persona.getFechaNacimiento() + "'",
+		+ "', Telefono = '" + persona.getTelefono() + "', Fecha_de_nacimiento = '" + persona.getFechaNacimiento() + "'",
 		"Nro_doc = '" + persona.getNroDoc() + "'");
 		return md.isEstado();
 	}
@@ -81,11 +81,7 @@ public class GestorPersonas implements IGestorPersonas {
 		ArrayList<String> per = md.select("personas", "Nombre, Apellido, tipo_Doc, Nro_doc, Ciudad,"
 				+ " Direccion, Telefono, Estado, Fecha_de_nacimiento", condicion);
 		for (String s: per) {
-<<<<<<< HEAD
 			String[] split = s.split(" -- ");
-=======
-			String[] split = s.split(",");
->>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 			personas.add(new Persona(split[0], split[1], split[2], split[3], split[4], split[5],
 					split[6], Integer.parseInt(split[7]), split[8], null));
 		}

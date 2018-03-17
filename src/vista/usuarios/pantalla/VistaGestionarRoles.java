@@ -82,6 +82,7 @@ public class VistaGestionarRoles extends JFrame {
 		this.roles = this.control.buscarRoles(rol);
 		
 		actualizarTablaR();
+		actualizarTablaU();
 	}
 	
 	private IRol rolSeleccionado() {
@@ -142,6 +143,7 @@ public class VistaGestionarRoles extends JFrame {
 					break;
 				}
 				dtm.addRow(row);
+				i++;
 			}
 		}
 	}

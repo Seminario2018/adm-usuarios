@@ -63,20 +63,14 @@ public class GestorRoles implements IGestorRoles {
 		if (!rol.getNombre().equals("")) {
 			condiciones.add("Nombre = '" + rol.getNombre() + "'");
 		}
-		if (!rol.getDescripcion().equals("")) {
-			condiciones.add("descripcion = '" + rol.getDescripcion() + "'");
-		}
+		
 		for(String s : condiciones) {
 			condicion += " AND " + s;
 		}
 		ArrayList<IRol> roles = new ArrayList<IRol>();
 		ArrayList<String> per = md.select("roles", "Nombre, Nombre_amigable, Descripcion, Estado", condicion);
 		for (String s: per) {
-<<<<<<< HEAD
 			String[] split = s.split(" -- ");
-=======
-			String[] split = s.split(",");
->>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 			roles.add(new Rol(split[0], split[1], split[2], Integer.parseInt(split[3]), null));
 		}
 		return roles;

@@ -5,6 +5,7 @@ package vista.personas.control;
 
 import javax.swing.JOptionPane;
 
+import controlador.Controlador;
 import controlador.IControlador;
 import modelo.personas.IPersona;
 
@@ -14,14 +15,13 @@ import modelo.personas.IPersona;
  */
 public class ControlModificarPersona implements IControlModificarPersona {
 	
-	private IControlador control;
+	private IControlador control = new Controlador();
 	
 	/**
-	 * @param control
+	 * 
 	 */
-	public ControlModificarPersona(IControlador control) {
+	public ControlModificarPersona() {
 		super();
-		this.control = control;
 	}
 
 	/* (non-Javadoc)

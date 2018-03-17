@@ -69,11 +69,7 @@ public class GestorPermisos implements IGestorPermisos {
 		ArrayList<IPermiso> permisos = new ArrayList();
 		ArrayList<String> per = md.select("permisos", "Nombre, Funcionalidad, Descripcion, Estado", condicion);
 		for (String s: per) {
-<<<<<<< HEAD
 			String[] split = s.split(" -- ");
-=======
-			String[] split = s.split(",");
->>>>>>> 70eb3b30f2fc8f8c6036eb7bf04e360bbf99f71b
 			permisos.add(new Permiso(split[0], split[1], split[2], Integer.parseInt(split[3])));
 		}
 		return permisos;
