@@ -74,8 +74,11 @@ public class ManejoDatos {
 	
 	public ArrayList<String> select(String tabla, String campos, String condicion){
 		estado = true;
+		ArrayList<String> fields = new ArrayList<String>();
 		ArrayList<String> res = new ArrayList<>();
-		ArrayList<String> fields = parsear(campos);
+		if (!tabla.equals(tabla)) {
+			fields = parsear(campos);
+		}
 		Connection c = con.conectar();
 		try {
 			Statement st = c.createStatement();
