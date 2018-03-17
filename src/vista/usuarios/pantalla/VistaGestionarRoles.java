@@ -380,5 +380,7 @@ public class VistaGestionarRoles extends JFrame {
 		cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
 		cmbEstado.setSelectedIndex(0);
 		panel.add(cmbEstado);
+		
+		actualizarTablaU();
 	}
 }

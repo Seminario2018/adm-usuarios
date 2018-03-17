@@ -76,15 +76,15 @@ public class VistaUsuarios extends JFrame {
 			break;
 		}
 		
-		//this.usuarios = control.buscarUsuario(u, p);
-		
+		this.usuarios = control.buscarUsuario(u, p);
+		/*
 		ArrayList<Object[]> rolesU = new ArrayList<Object[]>();
 		Object[] rolU = new Object[2];
 		rolU[0] = new Rol("SUPER", "Super-Usuario", "Todo lo puede", 1, null);
 		rolesU.add(rolU);
 		this.usuarios.add(new Usuario("Pepita", "Coqueta", "pepita@gmail.com", "pepita10", 1, rolesU));
 		this.usuarios.add(new Usuario("José", "El loco", "joseloko@hotmail.com", "josecito", 0, null));
-		
+		*/
 		actualizarTabla();
 	}
 	
