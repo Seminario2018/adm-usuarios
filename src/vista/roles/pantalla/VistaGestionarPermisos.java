@@ -74,6 +74,8 @@ public class VistaGestionarPermisos extends JFrame {
 	private void botonBuscar() {
 		IPermiso permiso = this.control.getIPermiso();
 		permiso.setNombre(txtNombre.getText());
+		permiso.setDescripcion("");
+		permiso.setFuncionalidad("");
 		switch ((String) cmbEstado.getSelectedItem()) {
 		case "Activo":
 			permiso.setEstado(1);
@@ -119,9 +121,9 @@ public class VistaGestionarPermisos extends JFrame {
 	}
 	
 	private void actualizarTablaR() {
-		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		DefaultTableModel dtm = (DefaultTableModel) tabler.getModel();
 		dtm.setRowCount(0);
-		table.revalidate();
+		tabler.revalidate();
 		
 		if (this.rol != null) {
 			ArrayList<Object[]> permisosRol = this.rol.getPermisos();
@@ -133,6 +135,7 @@ public class VistaGestionarPermisos extends JFrame {
 				row[1] = p.getFuncionalidad();
 				row[2] = p.getDescripcion();
 				dtm.addRow(row);
+				i++;
 			}
 		}
 	}
@@ -348,6 +351,5 @@ public class VistaGestionarPermisos extends JFrame {
 		cmbEstado.setSelectedIndex(0);
 		panel.add(cmbEstado);
 		
-		actualizarTablaR();
 	}
 }

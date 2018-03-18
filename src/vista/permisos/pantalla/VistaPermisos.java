@@ -73,8 +73,7 @@ public class VistaPermisos extends JFrame {
 			break;
 		}
 		
-		this.permisos.add(new Permiso("Permiso1", "Descripcion1", "Funcionalidad1", 1));
-		this.permisos.add(new Permiso("Permiso2", "Descripcion2", "Funcionalidad2", 1));
+		permisos = this.control.buscarPermiso(p);
 		
 		habilitarBotones();
 		

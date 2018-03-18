@@ -29,7 +29,7 @@ public class GestorPermisos implements IGestorPermisos {
 	@Override
 	public boolean modificarPermiso(IPermiso permiso) {
 		md.update("permisos", "Funcionalidad = '" + permiso.getFuncionalidad() 
-		+ ", Descripcion = '" + permiso.getDescripcion() + "' ", "Nombre = " + permiso.getNombre());
+		+ ", Descripcion = '" + permiso.getDescripcion() + "' ", "Nombre = '" + permiso.getNombre() + "'");
 		return false;
 	}
 
@@ -38,7 +38,7 @@ public class GestorPermisos implements IGestorPermisos {
 	 */
 	@Override
 	public boolean eliminarPermiso(IPermiso permiso) {
-		md.update("Permisos", "Estado = " + 0, "Nombre = " + permiso.getNombre());
+		md.update("permisos", "Estado = " + 0, "Nombre = '" + permiso.getNombre() + "'");
 		return md.isEstado();
 	}
 
@@ -54,17 +54,19 @@ public class GestorPermisos implements IGestorPermisos {
 		}else {
 			condicion = "Estado = 0";
 		}
-		if (!permiso.getFuncionalidad().equals("")) {
-			condiciones.add("funcionalidad = '" + permiso.getFuncionalidad() + "'");
-		}
-		if (!permiso.getNombre().equals("")) {
-			condiciones.add("Nombre = '" + permiso.getNombre() + "'");
-		}
-		if (!permiso.getDescripcion().equals("")) {
-			condiciones.add("descripcion = '" + permiso.getDescripcion() + "'");
-		}
-		for(String s : condiciones) {
-			condicion += " AND " + s;
+		if (permiso != null) {
+			if (!permiso.getFuncionalidad().equals("")) {
+				condiciones.add("funcionalidad = '" + permiso.getFuncionalidad() + "'");
+			}
+			if (!permiso.getNombre().equals("")) {
+				condiciones.add("Nombre = '" + permiso.getNombre() + "'");
+			}
+			if (!permiso.getDescripcion().equals("")) {
+				condiciones.add("descripcion = '" + permiso.getDescripcion() + "'");
+			}
+			for(String s : condiciones) {
+				condicion += " AND " + s;
+			}
 		}
 		ArrayList<IPermiso> permisos = new ArrayList();
 		ArrayList<String> per = md.select("permisos", "Nombre, Funcionalidad, Descripcion, Estado", condicion);
