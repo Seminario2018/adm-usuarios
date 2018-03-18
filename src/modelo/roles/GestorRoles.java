@@ -32,7 +32,8 @@ public class GestorRoles implements IGestorRoles {
 	@Override
 	public boolean modificarRol(IRol rol) {
 		md.update("roles", "Nombre_amigable = '" + rol.getNombreAmigable()
-		+ "', Descripcion = " + rol.getDescripcion() + "', Estado = " + rol.getEstado(), "Nombre = " + rol.getNombre());
+		+ "', Descripcion = '" + rol.getDescripcion() + "', Estado = " + rol.getEstado(),
+		"Nombre = '" + rol.getNombre() + "'");
 		return md.isEstado();
 	}
 
@@ -41,7 +42,7 @@ public class GestorRoles implements IGestorRoles {
 	 */
 	@Override
 	public boolean eliminarRol(IRol rol) {
-		md.update("roles", "Estado = " + 0, "Nombre = " + rol.getNombre());
+		md.update("roles", "Estado = " + 0, "Nombre = '" + rol.getNombre() + "'");
 		return md.isEstado();
 	}
 

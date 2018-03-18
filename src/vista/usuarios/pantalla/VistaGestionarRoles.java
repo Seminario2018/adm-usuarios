@@ -122,9 +122,9 @@ public class VistaGestionarRoles extends JFrame {
 	}
 	
 	private void actualizarTablaU() {
-		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		DefaultTableModel dtm = (DefaultTableModel) tableu.getModel();
 		dtm.setRowCount(0);
-		table.revalidate();
+		tableu.revalidate();
 		
 		if (this.usuario != null) {
 			ArrayList<Object[]> rolesUsuario = this.usuario.getRoles(); 

@@ -69,7 +69,7 @@ public class GestorUsuarios implements IGestorUsuarios {
 			condiciones.add("p.nro_doc = '" + persona.getNroDoc() + "'");
 		}
 		if (!usuario.getNombre().equals("")) {
-			condiciones.add("u.nombre = '" + persona.getApellido() + "'");
+			condiciones.add("u.nombre = '" + usuario.getNombre() + "'");
 		}
 		for(String s : condiciones) {
 			condicion += " AND " + s;

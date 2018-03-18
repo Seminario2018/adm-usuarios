@@ -5,6 +5,8 @@ package vista.roles.control;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import controlador.Controlador;
 import controlador.IControlador;
 import modelo.roles.IRol;
@@ -37,7 +39,13 @@ public class ControlRoles implements IControlRoles {
 	 */
 	@Override
 	public boolean eliminarRol(IRol rol) {
-		return control.eliminarRol(rol);
+		if (control.eliminarRol(rol)) {
+            JOptionPane.showMessageDialog(null, "El rol se eliminó con exito");
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Hubo un problema al eliminar el rol");
+            return false;
+        }
 	}
 
 	/* (non-Javadoc)

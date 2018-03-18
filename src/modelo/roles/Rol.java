@@ -59,9 +59,9 @@ public class Rol implements IRol {
 	public ArrayList<Object[]> getPermisos() {
 		ArrayList<Object[]> permisos = new ArrayList<Object[]>();
 		ArrayList<String> per = md.select("permisos p join permisosderoles pr",
-				"p.Nombre, p.Funcionalidad, p.Descripcion, p.Estado","pr.Estado = 1 AND '" + this.nombre + "' = pr.rol");
+				"p.Nombre, p.Funcionalidad, p.Descripcion, p.Estado, pr.fecha_de_asignacion","pr.Estado = 1 AND '" + this.nombre + "' = pr.rol");
 		for (String s: per) {
-			String[] split = s.split(" ");
+			String[] split = s.split(" -- ");
 			Object[] o = new Object[2];
 			o[0] = new Permiso(split[0], split[1],split[2], Integer.parseInt(split[3]));
 			o[1] = split[4];

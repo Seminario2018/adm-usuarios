@@ -19,6 +19,8 @@ import vista.roles.control.ControlModificarRol;
 import vista.roles.control.IControlModificarRol;
 import vista.usuarios.control.ControlModificarUsuario;
 import vista.usuarios.control.IControlModificarUsuario;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VistaModificarRol extends JFrame {
 
@@ -34,7 +36,7 @@ public class VistaModificarRol extends JFrame {
 		txtDescr.setText(this.rol.getDescripcion());
 	}
 	
-	private void botonGuardar() {
+	protected void botonGuardar() {
 		
 		this.rol.setNombre(txtRol.getText());
 		this.rol.setNombreAmigable(txtNAmigable.getText());
@@ -138,8 +140,14 @@ public class VistaModificarRol extends JFrame {
 		panel.add(panel_2, gbc_panel_2);
 		
 		JButton btnGuardarCambios = new JButton("Guardar cambios");
+		btnGuardarCambios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonGuardar();
+			}
+		});
 		panel_2.add(btnGuardarCambios);
 		
 		llenarCampos();
+		
 	}
 }
